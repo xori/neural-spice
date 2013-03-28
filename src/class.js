@@ -6,6 +6,46 @@
  * Contains class definitions.
 **/
 
+var DATA_NUM_ATTRIBUTES = 42;
+var DATA_NUM_OUTPUTS = 3;
+var DATA_WIN_STR  = "win";
+var DATA_LOSS_STR = "loss";
+var DATA_DRAW_STR = "draw";
+var DATA_WIN  = [ 1 , -1, -1];
+var DATA_LOSS = [ -1, 1 , -1];
+var DATA_DRAW = [ -1, -1, 1 ];
+var DATA_WIN_INDEX  = 0;
+var DATA_LOSS_INDEX = 1;
+var DATA_DRAW_INDEX = 2;
+
+/**
+ * Data
+ * Represents one piece of data.
+ * `row` is one row of the input data file.
+**/
+function Data(row){
+  this.input = row.split(",",DATA_NUM_ATTRIBUTES);
+  this.output = row.substr(row.lastIndexOf(",")+1); //extracts win/loss/draw
+  this.idx;   //index of the `1` in the output array
+  if (this.output == DATA_WIN_STR){
+    this.output = DATA_WIN;
+    this.idx = DATA_WIN_INDEX;
+  }
+  else if (this.output == DATA_LOSS_STR){
+    this.output = DATA_LOSS;
+    this.idx = DATA_LOSS_INDEX;
+  }
+  else if (this.output == DATA_DRAW_STR){
+    this.output = DATA_DRAW;
+    this.idx = DATA_DRAW_INDEX;
+  }
+} //Data()
+
+
+/**
+ * Synapse
+ * A connection between two Neurons.
+**/
 function Synapse(_to,_from,_weight){
   this.to     = _to;
   this.from   = _from;    //synapse connects neuron `from` to neuron `to`
@@ -13,12 +53,18 @@ function Synapse(_to,_from,_weight){
 } //Synapse()
 
 
+/**
+ * Neuron
+ * Basic worker in the neural network.
+ * Each neuron knows only about it's connections in, as we don't care
+ * about backpropogating at all.
+**/
 function Neuron(lyr,list){
-  list = list || Array();
+  list = list || Array(); //list is all the neurons this guy is connected to
 
   this.cin = Array();     //list of connections into this neuron
   this.output;            //output at one epoch
-  this.fired = false;     //if this neuron has fired this epoch
+  this.fired = true;      //if this neuron has fired this epoch
   this.layer = lyr;       //which layer this neuron is in...
 
   for (var i = 0; i < list.length; i++)
@@ -38,18 +84,20 @@ function Neuron(lyr,list){
     if (fired)
       return(output); //if we have already fired this run, just return
 
-    //otherwise, we need to calculate our output
-    output = 0;
+    output = 0; //otherwise, we need to calculate our output
     for (var i = 0; i < cin.length; i++)
       output += cin[i].from.fire() * cin[i].weight;
 
-    output = (Math.exp(2*output) - 1) / (Math.exp(2*output) + 1); //tanh
-    fired = true;       //don't do the math again if called again this epoch
+    output = (Math.exp(2*output) - 1) / (Math.exp(2*output) + 1); // = tanh(output)
+    fired = true;     //don't do the math again if called again this epoch
     return(output);
   } //Neuron.fire()
 } //Neuron()
 
-
+/**
+ * NeuralNetwork
+ * A full network.
+**/
 function NeuralNetwork(numIn, numOut){
 
   this.input  = Array();  //input layer
@@ -81,12 +129,39 @@ function NeuralNetwork(numIn, numOut){
    * Does the forward prop and returns true if the output obtained was correct.
   **/
   this.test = function(data){
+    //set up the input layer
+    for (var i = 0; i < input.length; i++)
+      input[i].output = data.input[i];  //never change `fired` to false
+
+    //reset the hidden layers so they refire this epoch
+    for (var i = 0; i < hidden.length; i++)
+      for (var j = 0; j < hidden[i].length; j++)
+        hidden[i][j].fired = false;
+
+    var out = Array();  //the output values
+    var max = -10;      //the highest output of the network range [-1..1]
+    var idx = -1;       //index of highest output
+    for (var i = 0; i < output.length; i++){
+      output[i].fired = false;    //reset output layer
+      out[i] = output[i].fire();  //and acquire all of the outputs
+      if (max < out[i]){
+        max = out[i];
+        idx = i;
+      }
+    }
+
+    return(data.idx == idx);
   } //NeuralNetwork.test()
 } //NeuralNetwork()
 
 
 
 function Chromosome(){
+  /**
+    crossover possibilities
+      union & intersection - networks must have same # of hidden layers
+  **/
+
   /**
     mutation possibilities
       add/remove a synapse
@@ -98,4 +173,3 @@ function Chromosome(){
       merge chains of singly connected hidden neurons
   **/
 } //Chromosome()
-
