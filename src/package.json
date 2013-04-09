@@ -1,0 +1,7 @@
+{
+	"name":"neural-spice",
+	"description":"GA Engine for evolving Neural Networks topography and weights.",
+	"version":"0.0.1",
+	"dependencies" : { },
+	"devDependencies": { }
+}
