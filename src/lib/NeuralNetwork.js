@@ -22,10 +22,14 @@ function NeuralNetwork(numIn, numOut){
    * Adds a new hidden layer to the network.
   **/
   this.addLayer = function(len,pos){
-    pos = pos || size-1;
+    pos = pos || this.size-1;
     var layer = Array();
-    for (var i = 0; i < len; i++)
-      layer.push(new Neuron(pos));
+    if (this.hidden.length)
+      for (var i = 0; i < len; i++)
+        layer.push(new Neuron(pos,this.hidden[this.hidden.length-1]));
+    else
+      for (var i = 0; i < len; i++)
+        layer.push(new Neuron(pos,this.input));
     this.hidden.push(layer);
     this.size++;
   } //NeuralNetwork.addLayer(len,pos)
