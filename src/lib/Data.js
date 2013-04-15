@@ -20,6 +20,7 @@ var DATA_DRAW_INDEX = 2;
 **/
 function Data(row){
   this.input = row.split(",",DATA_NUM_ATTRIBUTES);
+  //TODO input is characters, must be numbers
   this.output = row.substr(row.lastIndexOf(",")+1); //extracts win/loss/draw
   this.idx;   //index of the `1` in the output array
   if (this.output == DATA_WIN_STR){
