@@ -1,5 +1,5 @@
 
-var g = require('./config.js');
+var g = require('../config.js');
 
 var NUM_IN = 42;
 var NUM_OUT = 3;
@@ -35,9 +35,11 @@ function NeuralNetwork(){
       this.matrix[i][j] = g.random();
 
   this.fires = new Array();
-  for (var i = 0; i < TOTAL_NEURONS; i++)
-    this.fires[i] = 0;
-
+  for (var i = 0; i < TOTAL_NEURONS; i++){
+    this.fires[i] = new Object();
+    this.fires[i].hasFired = true;
+    this.fires[i].output   = 0;
+  }
 } //NeuralNetwork()
 
 
@@ -48,13 +50,14 @@ function NeuralNetwork(){
  * Recursion stops at the input layer, since fires[] will be set at that point.
 **/
 NeuralNetwork.prototype.fire = function(neuron){
-  if (this.fired[neuron])
-    return(this.fired[neuron]); //already calculated, return it
+  if (this.fires[neuron].hasFired)
+    return(this.fires[neuron].output);  //already calculated, return it
 
   for (var i = 0; i < neuron; i++)
-    this.fires[neuron] += this.matrix[neuron][i] * this.fire(i);
-  this.fires[neuron] = g.tanh(this.fires[neuron]);  //squashy squashy
-  return(this.fires[neuron]);
+    this.fires[neuron].output += this.matrix[neuron][i] * this.fire(i);
+  this.fires[neuron].output = g.tanh(this.fires[neuron].output);
+  this.fires[neuron].hasFired = true;
+  return(this.fires[neuron].output);
 } //NeuralNetwork.fire(neuron)
 
 /**
@@ -64,10 +67,12 @@ NeuralNetwork.prototype.fire = function(neuron){
 NeuralNetwork.prototype.forwardProp = function(data){
   //set up the input layer
   for (var i = INPUT_START; i < INPUT_END; i++)
-    this.fires[i] = data.input[i];
+    this.fires[i].output = data.input[i];
   //reset all neurons fired values
-  for (var i = INPUT_END; i < TOTAL_NEURONS; i++)
-    this.fires[i] = 0;
+  for (var i = INPUT_END; i < TOTAL_NEURONS; i++){
+    this.fires[i].hasFired = false;
+    this.fires[i].output = 0;
+  }
 
   for (var i = OUTPUT_END-1; i >= OUTPUT_START; i--)
     this.fire(i);
@@ -90,4 +95,17 @@ NeuralNetwork.prototype.test = function(data){
   return(data.idx == idx);
 } //NeuralNetwork.test(Data)
 
-module.exports = NeuralNetwork;
+module.exports = {
+  Net           : NeuralNetwork,
+  INPUT_START   : INPUT_START,
+  INPUT_END     : INPUT_END,
+  H1_START      : H1_START,
+  H1_END        : H1_END,
+  H2_START      : H2_START,
+  H2_END        : H2_END,
+  H3_START      : H3_START,
+  H3_END        : H3_END,
+  OUTPUT_START  : OUTPUT_START,
+  OUTPUT_END    : OUTPUT_END,
+  TOTAL_NEURONS : TOTAL_NEURONS
+};
