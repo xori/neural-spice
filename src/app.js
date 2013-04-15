@@ -14,5 +14,5 @@ var population = Array();
 //	DONE generate fitness
 //	DONE select winners
 //		if not last generation
-//  TODO breed winners
+//  DONE breed winners
 

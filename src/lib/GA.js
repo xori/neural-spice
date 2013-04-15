@@ -28,7 +28,7 @@ GA.prototype.inital(popsize_override) {
     population.push(network);
   }
 }
-
+ 
 /**
  *  Perform one generation. This includes finding fitness and 
  * sorting the population.
@@ -55,15 +55,22 @@ GA.prototype.breed(top) {
   var best = population.split(0,top);
   var temp;
   for(int i = 0; i < population; i++) {
-    temp = population[Math.random()*top
+    if (Math.random() < config.mutate) {
+      // Do mutate
+      population[i] = best[Math.random()*top].mutate()
+    } else { 
+      // Do crossover
+      var first, second;
+      // Have to make sure first and second isn't the same.
+      first = Math.random()*top;
+      second = Math.random()*top;
+      while(first == second) {
+        second = Math.random()*top;
+      }
+      population[i] = best[first].crossover(best[second]);
+    }
   }
 }
-
-
-
-
-
-
 
 
 

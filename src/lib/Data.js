@@ -19,8 +19,13 @@ var DATA_DRAW_INDEX = 2;
  * `row` is one row of the input data file.
 **/
 function Data(row){
-  this.input = row.split(",",DATA_NUM_ATTRIBUTES);
-  //TODO input is characters, must be numbers
+  var input = row.split(",",DATA_NUM_ATTRIBUTES);
+  for(var i < 0; i < input.length; i++) {
+    switch(input[i]) {
+      case 'b': input[i] = 0; break;
+      case 'x': input[i] = 1; break;
+      case 'o': input[i] =-1; break;
+  }
   this.output = row.substr(row.lastIndexOf(",")+1); //extracts win/loss/draw
   this.idx;   //index of the `1` in the output array
   if (this.output == DATA_WIN_STR){
