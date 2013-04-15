@@ -37,7 +37,7 @@ function Data(row){
 } //Data()
 
 module.exports = {
-  row: Data,
+  Row: Data,
   DATA_NUM_ATTRIBUTES : DATA_NUM_ATTRIBUTES,
   DATA_NUM_OUTPUTS : DATA_NUM_OUTPUTS,
   DATA_WIN_STR : DATA_WIN_STR,
