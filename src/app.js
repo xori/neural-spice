@@ -1,9 +1,7 @@
 var Globals       = require('./config.js');
 var NeuralNetwork = require('./lib/NeuralNetwork.js');
 
-var _n = new NeuralNetwork(5,5);
-_n.addLayer(5);
-_n.addLayer(5);
+var _n = new NeuralNetwork();
 console.log(_n);
 
 
