@@ -4,6 +4,7 @@ var globals = {
 	population : 800,
 	mutation	: 0.1,
 	crossover	: 0.9,
+	tournament_size: 5,
 	//whatever	
 };
 

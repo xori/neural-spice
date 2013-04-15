@@ -13,8 +13,8 @@ var population = Array();
 //TODO Randomize initial population
 
 //FOR g in GENERATIONS
-//	TODO generate fitness
-//	TODO select winners
+//	DONE generate fitness
+//	DONE select winners
 //		if not last generation
 //  TODO breed winners
 

@@ -1,11 +1,13 @@
 
-var DataVars = requrie('./Data.js');
+var DataVars = require('./Data.js');
+var NeuralNetwork = require('./NeuralNetwork.js');
 var NUM_ATT  = DataVars.DATA_NUM_ATTRIBUTES;
 var NUM_OUT  = DataVars.DATA_NUM_OUTPUTS;
 
 function Chromosome(){
 
   this.network = new NeuralNetwork(NUM_ATT,NUM_OUT);
+  this.fitness = 0;
 
   /**
     mutation possibilities
