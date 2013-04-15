@@ -6,7 +6,19 @@ var Synapse = require('./Synapse.js');
  * Each neuron knows only about it's connections in, as we don't care
  * about backpropogating at all.
 **/
-function Neuron(lyr,list){
+function Neuron(){
+  
+  function Synapse(_to,_from,_weight){
+    this.to     = _to;
+    this.from   = _from;
+    this.weight = _weight;
+  }
+  
+  
+  
+  
+  
+  
   list = list || Array(); //list is all the neurons this guy is connected to
 
   this.cin = Array();     //list of connections into this neuron
