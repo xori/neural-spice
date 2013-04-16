@@ -3,10 +3,8 @@ var NeuralNetwork = require('./NeuralNetwork.js');
 var g             = require('../config.js');
 
 function Chromosome(){
-
   this.network = new NeuralNetwork.Net();
   this.fitness = 0;
-
 } //Chromosome()
 
 /**
