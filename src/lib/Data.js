@@ -29,15 +29,12 @@ function Data(row){
       case 'o': this.input[i] =-1; break;
       default: this.input.splice(i,1);
     }
-<<<<<<< HEAD
   var input = row.split(",",DATA_NUM_ATTRIBUTES);
   for (var i = 0; i < input.length; i++){
     switch(input[i]) {
       case 'b': input[i] = 0; break;
       case 'x': input[i] = 1; break;
       case 'o': input[i] =-1; break;
-=======
->>>>>>> 29dd89153ffa57a6e2310215b56c0e808d99068e
   }
   this.output = row.substr(row.lastIndexOf(",")+1); //extracts win/loss/draw
   this.idx;   //index of the `1` in the output array
