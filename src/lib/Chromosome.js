@@ -109,12 +109,14 @@ function remove_neuron(chromo){
   for (var i = 0; i < tries; i++){
     //choose a random non-output neuron
     var neuron = parseInt(Math.random() * NeuralNetwork.OUTPUT_START);
-    var all_zero = true;
+    var all_zero = true && (neuron > NeuralNetwork.INPUT_END);
     for (var j = 0; j < neuron && all_zero; j++)
       all_zero = (chromo.network.matrix[j][neuron] == 0);
     if (!all_zero){
       for (var j = 0; j < neuron; j++)
         chromo.network.matrix[j][neuron] = 0;
+      for (var j = neuron+1; j < NeuralNetwork.TOTAL_NEURONS; j++)
+        chromo.network.matrix[neuron][j] = 0; //necessary for input layer
       return;
     }
   }
@@ -124,8 +126,8 @@ function remove_neuron(chromo){
 
 
 function add_synapse(chromo){
-  var from =parseInt(Math.random() * (NeuralNetwork.TOTAL_NEURONS-1)); //exclude final neuron
-  var to =parseInt(from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1));
+  var from = parseInt(Math.random() * (NeuralNetwork.TOTAL_NEURONS-1)); //exclude final neuron
+  var to = parseInt(from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1));
   chromo.network.matrix[from][to] = g.random();
 } //add_synapse(Chromosome)
 

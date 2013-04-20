@@ -10,11 +10,11 @@ var TOTAL_NEURONS = NUM_IN+NUM_OUT + MAX_NUM_LYR*MAX_IN_LYR;
 var INPUT_START  = 0;
 var INPUT_END    = INPUT_START+NUM_IN;
 var H1_START     = INPUT_END;
-var H1_END       = H1_START+MAX_NUM_LYR;
+var H1_END       = H1_START+MAX_IN_LYR;
 var H2_START     = H1_END;
-var H2_END       = H2_START+MAX_NUM_LYR;
+var H2_END       = H2_START+MAX_IN_LYR;
 var H3_START     = H2_END;
-var H3_END       = H3_START+MAX_NUM_LYR;
+var H3_END       = H3_START+MAX_IN_LYR;
 var OUTPUT_START = H3_END;
 var OUTPUT_END   = OUTPUT_START+NUM_OUT;
 
@@ -109,6 +109,73 @@ NeuralNetwork.prototype.test = function(data){
     }
   return(data.idx == idx);
 } //NeuralNetwork.test(Data)
+
+
+NeuralNetwork.prototype.toString = function(){
+  /*
+    I   H   H   H   O       show each neuron as # links in/out
+    N   I   I   I   U
+    P   D   D   D   T
+    U   D   D   D   P
+    T   E   E   E   U
+        N   N   N   T
+  */
+  var inputs = new Array();  var outputs = new Array();
+  var hidden1 = new Array(); var hidden2 = new Array(); var hidden3 = new Array();
+  for (var i = 0; i < 50; i++){
+    hidden1[i] = new Object(); hidden2[i] = new Object(); hidden3[i] = new Object();
+    hidden1[i].ins = hidden1[i].outs = hidden2[i].ins = hidden2[i].outs = hidden3[i].ins = hidden3[i].outs = 0;
+    if (i < INPUT_END){
+      inputs[i] = new Object();
+      inputs[i].ins = inputs[i].outs = 0;
+    }
+    if (i < 3){
+      outputs[i] = new Object();
+      outputs[i].ins = outputs[i].outs = 0;
+    }
+  }
+
+  var pos = 0;
+  for (; pos < INPUT_END; pos++){
+    for (var i = 0; i < TOTAL_NEURONS; i++){
+      if (this.matrix[pos][i]){ inputs[pos].outs++; }
+      if (this.matrix[i][pos]){ inputs[pos].ins++; }
+    }
+  }
+
+  for (var i = OUTPUT_START, pos = 0; i < OUTPUT_END; i++, pos++){
+    for (var j = 0; j < TOTAL_NEURONS; j++){
+      if (this.matrix[i][j]){ outputs[pos].outs++; }
+      if (this.matrix[j][i]){ outputs[pos].ins++; }
+    }
+  }
+
+  for (var i = H1_START, pos = 0; i < H1_END; i++, pos++){
+    var p1 = i; var p2 = i+MAX_IN_LYR; var p3 = i+2*MAX_IN_LYR;
+    for (var j = 0; j < TOTAL_NEURONS; j++){
+      if (this.matrix[p1][j]){ hidden1[pos].outs++; }
+      if (this.matrix[j][p1]){ hidden1[pos].ins++; }
+      if (this.matrix[p2][j]){ hidden2[pos].outs++; }
+      if (this.matrix[j][p2]){ hidden2[pos].ins++; }
+      if (this.matrix[p3][j]){ hidden3[pos].outs++; }
+      if (this.matrix[j][p3]){ hidden3[pos].ins++; }
+    }
+  }
+
+  for (var i = 0; i < MAX_IN_LYR; i++){
+    var str = "";
+    if (i > 3 && i < 46)
+      str += "("+inputs[i-4].ins+","+inputs[i-4].outs+")";
+    str += "\t";
+    str += "("+hidden1[i].ins+","+hidden1[i].outs+")\t";
+    str += "("+hidden2[i].ins+","+hidden2[i].outs+")\t";
+    str += "("+hidden3[i].ins+","+hidden3[i].outs+")\t";
+    if (i > 24 && i < 28)
+      str += "("+outputs[i-25].ins+","+outputs[i-25].outs+")";
+    console.log(str);
+  }
+
+} //NeuralNetwork.toString()
 
 
 module.exports = {
