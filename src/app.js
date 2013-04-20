@@ -1,13 +1,14 @@
-var globals       = require('./config.js');
-var NeuralNetwork = require('./lib/NeuralNetwork.js');
+var globals = require('./config.js');
+var N = require('./lib/NeuralNetwork.js');
+var GA = require('./lib/GA.js');
 
-var _n = new NeuralNetwork();
+var _n = new N.Net();
 console.log(_n);
 
 
 //TODO Setup GA environment
 var population = Array();
-//var GA = new GASystem(globals, population);
+var ga = new GA(globals, population);
 //TODO Randomize initial population
 
 //FOR g in GENERATIONS

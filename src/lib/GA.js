@@ -72,3 +72,4 @@ GA.prototype.breed = function(top) {
   }
 }
 
+module.exports = GA;
