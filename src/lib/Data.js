@@ -35,6 +35,7 @@ function Data(row){
       case 'b': input[i] = 0; break;
       case 'x': input[i] = 1; break;
       case 'o': input[i] =-1; break;
+    };
   }
   this.output = row.substr(row.lastIndexOf(",")+1); //extracts win/loss/draw
   this.idx;   //index of the `1` in the output array
