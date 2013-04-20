@@ -16,7 +16,7 @@ function GA (_config, _data, _population) {
  * this implementation it uses the mutate function of a chromo-
  * some to generate
  */
-GA.prototype.inital(popsize_override) {
+GA.prototype.inital = function(popsize_override) {
   var pop_size = popsize_override || this.config.population;
   var network;
 
@@ -34,7 +34,7 @@ GA.prototype.inital(popsize_override) {
  * sorting the population.
  * @return Sorted population array of Chromosomes
  */
-GA.prototype.tick() {
+GA.prototype.tick = function() {
   for(var indv = 0; indv < this.population.length; indv++) {
     this.population[i].fitness = 0;
     for(var i = 0; i < this.data.length; i++) {
@@ -50,11 +50,11 @@ GA.prototype.tick() {
 /**
  * Breeds the best `Config.tournySize` (or `top`) best individuals.
  */
-GA.prototype.breed(top) {
+GA.prototype.breed = function(top) {
   top = top || this.config.tournament_size;
   var best = this.population.split(0,top);
   var temp;
-  for(int i = 0; i < this.population.length; i++) {
+  for(var i = 0; i < this.population.length; i++) {
     if (Math.random() < this.config.mutate) {
       // Do mutate
       this.population[i] = best[Math.random()*top].mutate()
