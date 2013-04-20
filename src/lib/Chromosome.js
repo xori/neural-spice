@@ -64,15 +64,20 @@ function intersect(nn1,nn2){
 **/
 Chromosome.prototype.mutate = function(){
   var val = Math.random();
-  var num = 2;
+  var num = 4;
   if (val < 1/num)
     add_neuron(this);
   else if (val < 2/num)
     remove_neuron(this);
+  else if (val < 3/num)
+    add_synapse(this);
+  else if (val < 4/num);
+    remove_synapse(this);
 } //Chromosome.mutate()
 
 
-function add_neuron(chromo){
+function add_neuron(chromo,freq){
+  freq = freq || 1;
   //scan for a zero'd out column in chromo.network.matrix, column #i
   //if found, randomly populate that column i and row i with values
   for (var i = NeuralNetwork.INPUT_END; i < NeuralNetwork.OUTPUT_START; i++){
@@ -81,9 +86,15 @@ function add_neuron(chromo){
       all_zero = (chromo.network.matrix[j][i] == 0);
     if (all_zero){  //neuron `i` does not currently exist
       for (var j = 0; j < i; j++)
-        chromo.network.matrix[j][i] = g.random();
+        if (Math.random() < freq)
+          chromo.network.matrix[j][i] = g.random();
+        //else  //all zeros anyways
+        //  chromo.network.matrix[j][i] = 0;
       for (var j = i+1; j < NeuralNetwork.TOTAL_NEURONS; j++)
-        chromo.network.matrix[i][j] = g.random();
+        if (Math.random() < freq)
+          chromo.network.matrix[i][j] = g.random();
+        else  //these connections may be non-zero
+          chromo.network.matrix[i][j] = 0;
       return; //add only one neuron
     }
   }
@@ -95,7 +106,40 @@ function add_neuron(chromo){
 function remove_neuron(chromo){
   //delete a random non-output node by zeroning out the col/row
   var tries = 50;
-  for (var i = 0; i < tries; i++);
+  for (var i = 0; i < tries; i++){
+    //choose a random non-output neuron
+    var neuron = Math.random() * NeuralNetwork.OUTPUT_START;
+    var all_zero = true;
+    for (var j = 0; j < neuron && all_zero; j++)
+      all_zero = (chromo.network.matrix[j][neuron] == 0);
+    if (!all_zero){
+      for (var j = 0; j < neuron; j++)
+        chromo.network.matrix[j][neuron] = 0;
+      return;
+    }
+  }
+  //if we got here, we failed to find a removable neuron
+  add_neuron(chromo);
 } //remove_neuron(Chromosome)
+
+
+function add_synapse(chromo){
+  var from = Math.random() * (NeuralNetwork.TOTAL_NEURONS-1); //exclude final neuron
+  var to = from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1);
+  chromo.network.matrix[from][to] = g.random();
+} //add_synapse(Chromosome)
+
+
+function remove_synapse(chromo){
+  var tries = 20000;
+  for (var i = 0; i < tries; i++){
+    var from = Math.random() * (NeuralNetwork.TOTAL_NEURONS-1);
+    var to = from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1);
+    if (chromo.network.matrix[from][to]){
+      chromo.network.matrix[from][to] = 0;
+      return; //only remove one
+    }
+  }
+} //remove_synapse(Chromosome)
 
 module.exports = Chromosome;
