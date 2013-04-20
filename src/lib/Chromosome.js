@@ -64,14 +64,38 @@ function intersect(nn1,nn2){
 **/
 Chromosome.prototype.mutate = function(){
   var val = Math.random();
-  add_neuron(this);
+  var num = 2;
+  if (val < 1/num)
+    add_neuron(this);
+  else if (val < 2/num)
+    remove_neuron(this);
 } //Chromosome.mutate()
 
 
 function add_neuron(chromo){
-  //TODO scan for a zero'd out column in chromo.network.matrix, column #i
+  //scan for a zero'd out column in chromo.network.matrix, column #i
   //if found, randomly populate that column i and row i with values
-  //if not found, delete a random non-output node by zeroning out the col/row <- remove_neuron
+  for (var i = NeuralNetwork.INPUT_END; i < NeuralNetwork.OUTPUT_START; i++){
+    var all_zero = true;
+    for (var j = 0; j < i && all_zero; j++)
+      all_zero = (chromo.network.matrix[j][i] == 0);
+    if (all_zero){  //neuron `i` does not currently exist
+      for (var j = 0; j < i; j++)
+        chromo.network.matrix[j][i] = g.random();
+      for (var j = i+1; j < NeuralNetwork.TOTAL_NEURONS; j++)
+        chromo.network.matrix[i][j] = g.random();
+      return; //add only one neuron
+    }
+  }
+  //if we get here, no neuron can be added
+  remove_neuron(chromo);
 } //add_neuron(Chromosome)
+
+
+function remove_neuron(chromo){
+  //delete a random non-output node by zeroning out the col/row
+  var tries = 50;
+  for (var i = 0; i < tries; i++);
+} //remove_neuron(Chromosome)
 
 module.exports = Chromosome;
