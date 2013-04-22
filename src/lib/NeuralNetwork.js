@@ -161,15 +161,16 @@ NeuralNetwork.prototype.toString = function(){
       if (this.matrix[j][p3]){ hidden3[pos].ins++; }
     }
   }
-
+  
+  
   for (var i = 0; i < MAX_IN_LYR; i++){
     var str = "";
     if (i > 3 && i < 46)
       str += "("+inputs[i-4].ins+","+inputs[i-4].outs+")";
     str += "\t";
-    str += "("+hidden1[i].ins+","+hidden1[i].outs+")\t";
-    str += "("+hidden2[i].ins+","+hidden2[i].outs+")\t";
-    str += "("+hidden3[i].ins+","+hidden3[i].outs+")\t";
+    str += "("+l(hidden1[i].ins)+","+l(hidden1[i].outs)+")  ";
+    str += "("+l(hidden2[i].ins)+","+l(hidden2[i].outs)+")  ";
+    str += "("+l(hidden3[i].ins)+","+l(hidden3[i].outs)+")  ";
     if (i > 24 && i < 28)
       str += "("+outputs[i-25].ins+","+outputs[i-25].outs+")";
     console.log(str);
@@ -177,6 +178,15 @@ NeuralNetwork.prototype.toString = function(){
 
 } //NeuralNetwork.toString()
 
+/**
+ * Private Function:
+ * Add leading spaces to numbers, turning '(3,100)' to '(  3,100)' forcing
+ * better output.
+ **/
+function l (obj) {
+  var leading_space = "   ";
+  return (leading_space + obj).slice(-leading_space.length);
+} // leading spaces
 
 module.exports = {
   Net           : NeuralNetwork,

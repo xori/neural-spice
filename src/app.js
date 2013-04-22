@@ -1,29 +1,16 @@
 var globals = require('./config.js');
-var N = require('./lib/NeuralNetwork.js');
 var GA = require('./lib/GA.js');
-var Chromosome = require('./lib/Chromosome.js');
+var Data = require('./lib/Data.js');
 
-var net = new N.Net();
-var chromo = new Chromosome();
-for (var i = 0; i < 50; i++)
-  chromo.mutate();
-chromo.network.toString();
-//console.log(chromo.network.matrix[43]);
-return;
-
-
-//TODO Setup GA environment
 var population = Array();
-var ga = new GA(globals, population);
-//TODO Randomize initial population
+var data = Data.loadFile();
+console.log(data.length + " rows loaded.");
+var ga = new GA(globals, data);
 ga.inital();
 
 ga.tick();
 
+return;
 ga.breed(5);
-//FOR g in GENERATIONS
-//	DONE generate fitness
-//	DONE select winners
-//		if not last generation
-//  DONE breed winners
-
+ga.tick();
+ga.population[0].network.toString();

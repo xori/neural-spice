@@ -1,9 +1,6 @@
 
 var NeuralNetwork = require('./NeuralNetwork.js');
 var Chromosome = require('./Chromosome.js');
-var config;
-var population;
-var data = new Array();
 
 function GA (_config, _data, _population) {
   this.config = _config;
@@ -19,7 +16,8 @@ function GA (_config, _data, _population) {
 GA.prototype.inital = function(popsize_override) {
   var pop_size = popsize_override || this.config.population;
   var network;
-
+  
+  console.time("Generate Inital Pop")
   for(var p = 0; p < pop_size; p++) {
     network = new Chromosome();
     for(var i = 0; i < 5; i++) {
@@ -27,6 +25,7 @@ GA.prototype.inital = function(popsize_override) {
     }
     this.population.push(network);
   }
+  console.timeEnd("Generate Inital Pop")
 }
 
 /**
@@ -36,14 +35,16 @@ GA.prototype.inital = function(popsize_override) {
  */
 GA.prototype.tick = function() {
   for(var indv = 0; indv < this.population.length; indv++) {
-    this.population[i].fitness = 0;
+    this.population[indv].fitness = 0;
     for(var i = 0; i < this.data.length; i++) {
-      if(this.population[i].network.test(this.data[i])) {
-        this.population[i].fitness++;
+      if(this.population[indv].network.test(this.data[i])) {
+        this.population[indv].fitness++;
       }
+      process.stdout.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
     } //no need to normalize, sweet
   }
   this.population.sort(function(a,b){return a.fitness-b.fitness});
+  console.log("\n"+(this.population[0].fitness/this.data.length+"").slice(0,4));
   return this.population;
 }
 

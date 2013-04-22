@@ -28,13 +28,6 @@ function Data(row){
       case 'x': this.input[i] = 1; break;
       case 'o': this.input[i] =-1; break;
       default: this.input.splice(i,1);
-    }
-  var input = row.split(",",DATA_NUM_ATTRIBUTES);
-  for (var i = 0; i < input.length; i++){
-    switch(input[i]) {
-      case 'b': input[i] = 0; break;
-      case 'x': input[i] = 1; break;
-      case 'o': input[i] =-1; break;
     };
   }
   this.output = row.substr(row.lastIndexOf(",")+1); //extracts win/loss/draw
@@ -55,13 +48,14 @@ function Data(row){
 
 
 function Load_File(_filename) {
-  var filename = _filename || DATA_FILE;
-  console.log(filename);
+  var filename = _filename || DATA_FILE
+  console.time(filename);
   var data = fs.readFileSync(filename).toString();
   var rows = data.split('\n');
   for(var i = 0; i < rows.length; i++) {
     rows[i] = new Data(rows[i]);
   }
+  console.timeEnd(filename);
   return rows;
 } //Load_File()
 
