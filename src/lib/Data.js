@@ -55,6 +55,36 @@ function Load_File(_filename) {
   for(var i = 0; i < rows.length; i++) {
     rows[i] = new Data(rows[i]);
   }
+
+  for (var i = rows.length-1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i+1));
+    var t = rows[i];
+    rows[j] = rows[i];
+    rows[j] = t;
+  }
+
+  var ret = new Array();
+  var pos = 0,i = 0; var win = 0, lose = 0, draw = 0;
+  var max = 999; var single = max / 3;
+  while (pos < max){
+    if (win < single && rows[i].idx == DATA_WIN_INDEX){
+      win++;
+      ret[pos++] = rows[i];
+    }
+    else if (lose < single && rows[i].idx == DATA_LOSS_INDEX){
+      lose++;
+      ret[pos++] = rows[i];
+    }
+    else if (draw < single && rows[i].idx == DATA_DRAW_INDEX){
+      draw++;
+      ret[pos++] = rows[i];
+    }
+    i++;
+  }
+
+  console.timeEnd(filename);
+  return ret;//rows;
+
   console.timeEnd(filename);
   return rows.splice(0,3000);
 } //Load_File()
