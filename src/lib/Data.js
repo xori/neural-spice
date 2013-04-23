@@ -1,3 +1,5 @@
+var config = require('../config.js');
+
 /**
  * Private variables
 **/
@@ -65,7 +67,7 @@ function Load_File(_filename) {
 
   var ret = new Array();
   var pos = 0,i = 0; var win = 0, lose = 0, draw = 0;
-  var max = 6000; var single = max / 3;
+  var max = config.data_size; var single = max / 3;
   while (pos < max){
     if (win < single && rows[i].idx == DATA_WIN_INDEX){
       win++;
