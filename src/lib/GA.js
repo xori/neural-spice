@@ -42,8 +42,7 @@ GA.prototype.tick = function(first) {
       if(this.population[indv].network.test(this.data[i])) {
         this.population[indv].fitness++;
       }
-      if (this.config.verbose)
-        process.stdout.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
+      process.stderr.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
     } //no need to normalize, sweet
   }
   this.population.sort(function(a,b){return b.fitness-a.fitness});
