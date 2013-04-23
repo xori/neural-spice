@@ -6,9 +6,9 @@ var DATA_NUM_OUTPUTS = 3;
 var DATA_WIN_STR  = "win";
 var DATA_LOSS_STR = "loss";
 var DATA_DRAW_STR = "draw";
-var DATA_WIN  = [ 1 , -1, -1];
-var DATA_LOSS = [ -1, 1 , -1];
-var DATA_DRAW = [ -1, -1, 1 ];
+var DATA_WIN  = [ 1 , 0, 0];
+var DATA_LOSS = [ 0, 1 , 0];
+var DATA_DRAW = [ 0, 0, 1 ];
 var DATA_WIN_INDEX  = 0;
 var DATA_LOSS_INDEX = 1;
 var DATA_DRAW_INDEX = 2;
@@ -26,7 +26,7 @@ function Data(row){
     switch(this.input[i]) {
       case 'b': this.input[i] = 0; break;
       case 'x': this.input[i] = 1; break;
-      case 'o': this.input[i] =-1; break;
+      case 'o': this.input[i] =0.2; break;
       default: this.input.splice(i,1);
     };
   }
