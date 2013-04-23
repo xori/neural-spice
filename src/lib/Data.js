@@ -24,9 +24,9 @@ function Data(row){
   this.input = row.split(",",DATA_NUM_ATTRIBUTES);
   for(var i = 0; i < this.input.length; i++) {
     switch(this.input[i]) {
-      case 'b': this.input[i] = 0; break;
+      case 'b': this.input[i] =.2; break;
       case 'x': this.input[i] = 1; break;
-      case 'o': this.input[i] =0.2; break;
+      case 'o': this.input[i] = 0; break;
       default: this.input.splice(i,1);
     };
   }
@@ -65,7 +65,7 @@ function Load_File(_filename) {
 
   var ret = new Array();
   var pos = 0,i = 0; var win = 0, lose = 0, draw = 0;
-  var max = 999; var single = max / 3;
+  var max = 6000; var single = max / 3;
   while (pos < max){
     if (win < single && rows[i].idx == DATA_WIN_INDEX){
       win++;

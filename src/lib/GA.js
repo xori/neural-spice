@@ -34,6 +34,7 @@ GA.prototype.inital = function(popsize_override) {
  * @return Sorted population array of Chromosomes
  */
 GA.prototype.tick = function() {
+  console.time("tick");
   for(var indv = 0; indv < this.population.length; indv++) {
     this.population[indv].fitness = 0;
     for(var i = 0; i < this.data.length; i++) {
@@ -45,6 +46,7 @@ GA.prototype.tick = function() {
   }
   this.population.sort(function(a,b){return b.fitness-a.fitness});
   console.log("\n"+(this.population[0].fitness/this.data.length+"").slice(0,4));
+  console.timeEnd("tick");
   return this.population;
 }
 
