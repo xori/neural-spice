@@ -66,8 +66,9 @@ NeuralNetwork.prototype.fire = function(neuron){
     return(this.fires[neuron].output);  //already calculated, return it
 
   for (var i = 0; i < neuron; i++)
-    this.fires[neuron].output += this.matrix[i][neuron] * this.fire(i);
-  this.fires[neuron].output = g.tanh(this.fires[neuron].output);
+    //this.fires[neuron].output += this.matrix[i][neuron] * this.fire(i);
+    this.fires[neuron].output += (this.matrix[i][neuron] ? this.matrix[i][neuron] * this.fire(i) : 0);
+  this.fires[neuron].output = g.siggy(this.fires[neuron].output);
   this.fires[neuron].hasFired = true;
   return(this.fires[neuron].output);
 } //NeuralNetwork.fire(neuron)
