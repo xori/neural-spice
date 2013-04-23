@@ -43,7 +43,7 @@ GA.prototype.tick = function() {
       process.stdout.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
     } //no need to normalize, sweet
   }
-  this.population.sort(function(a,b){return a.fitness-b.fitness});
+  this.population.sort(function(a,b){return b.fitness-a.fitness});
   console.log("\n"+(this.population[0].fitness/this.data.length+"").slice(0,4));
   return this.population;
 }
