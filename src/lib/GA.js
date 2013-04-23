@@ -26,6 +26,7 @@ GA.prototype.inital = function(popsize_override) {
     this.population.push(network);
   }
   if(this.config.verbose) console.timeEnd("Generate Inital Pop");
+  this.tick(0);
 }
 
 /**
@@ -33,10 +34,11 @@ GA.prototype.inital = function(popsize_override) {
  * sorting the population.
  * @return Sorted population array of Chromosomes
  */
-GA.prototype.tick = function() {
+GA.prototype.tick = function(first) {
+  first = first || 1;
   for(var indv = 0; indv < this.population.length; indv++) {
     this.population[indv].fitness = 0;
-    for(var i = 0; i < this.data.length; i++) {
+    for(var i = first; i < this.data.length; i++) {
       if(this.population[indv].network.test(this.data[i])) {
         this.population[indv].fitness++;
       }
