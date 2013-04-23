@@ -20,7 +20,7 @@ GA.prototype.inital = function(popsize_override) {
   console.time("Generate Inital Pop")
   for(var p = 0; p < pop_size; p++) {
     network = new Chromosome();
-    for(var i = 0; i < 5; i++) {
+    for(var i = 0; i < 500; i++) {
       network.mutate();
     }
     this.population.push(network);
@@ -53,7 +53,7 @@ GA.prototype.tick = function() {
  */
 GA.prototype.breed = function(top) {
   top = top || this.config.tournament_size;
-  var best = this.population.split(0,top);
+  var best = this.population.splice(0,top);
   var temp;
   for(var i = 0; i < this.population.length; i++) {
     if (Math.random() < this.config.mutate) {

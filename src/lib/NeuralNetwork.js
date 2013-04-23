@@ -103,9 +103,9 @@ NeuralNetwork.prototype.test = function(data){
   var max = -1;
   var idx = 0;
   for (var i = OUTPUT_START; i < OUTPUT_END; i++)
-    if (max < this.fires[i]){
-      max = this.fires[i];
-      idx = i;
+    if (max < this.fires[i].output){
+      max = this.fires[i].output;
+      idx = i-OUTPUT_START;
     }
   return(data.idx == idx);
 } //NeuralNetwork.test(Data)
