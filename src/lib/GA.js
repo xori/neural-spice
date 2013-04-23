@@ -53,9 +53,13 @@ GA.prototype.tick = function() {
  */
 GA.prototype.breed = function(top) {
   top = top || this.config.tournament_size;
-  var best = this.population.splice(0,top);
+  var best = [];
+  for(var p = 0; p < top-1; p++)
+    best.push(this.population[parseInt(Math.random()*this.population.length)]);
+  best.push(this.population[0]);
   var temp;
-  for(var i = 0; i < this.population.length; i++) {
+
+  for(var i = 1; i < this.population.length; i++) {
     if (Math.random() < this.config.mutate) {
       // Do mutate
       this.population[i] = best[Math.random()*top].mutate()
@@ -63,10 +67,10 @@ GA.prototype.breed = function(top) {
       // Do crossover
       var first, second;
       // Have to make sure first and second isn't the same.
-      first = Math.random()*top;
-      second = Math.random()*top;
+      first = parseInt(Math.random()*top);
+      second = parseInt(Math.random()*top);
       while(first == second) {
-        second = Math.random()*top;
+        second = parseInt(Math.random()*top);
       }
       this.population[i] = best[first].crossover(best[second]);
     }

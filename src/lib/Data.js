@@ -56,7 +56,7 @@ function Load_File(_filename) {
     rows[i] = new Data(rows[i]);
   }
   console.timeEnd(filename);
-  return rows;
+  return rows.splice(0,3000);
 } //Load_File()
 
 module.exports = {
