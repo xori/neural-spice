@@ -17,7 +17,7 @@ GA.prototype.inital = function(popsize_override) {
   var pop_size = popsize_override || this.config.population;
   var network;
   
-  console.time("Generate Inital Pop")
+  if(this.config.verbose) console.time("Generate Inital Pop");
   for(var p = 0; p < pop_size; p++) {
     network = new Chromosome();
     for(var i = 0; i < 500; i++) {
@@ -25,7 +25,7 @@ GA.prototype.inital = function(popsize_override) {
     }
     this.population.push(network);
   }
-  console.timeEnd("Generate Inital Pop")
+  if(this.config.verbose) console.timeEnd("Generate Inital Pop");
 }
 
 /**
@@ -40,11 +40,13 @@ GA.prototype.tick = function() {
       if(this.population[indv].network.test(this.data[i])) {
         this.population[indv].fitness++;
       }
-      process.stdout.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
+      if (this.config.verbose)
+        process.stdout.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
     } //no need to normalize, sweet
   }
   this.population.sort(function(a,b){return b.fitness-a.fitness});
-  console.log("\n"+(this.population[0].fitness/this.data.length+"").slice(0,4));
+  if(this.config.verbose) 
+    console.log("\n"+(this.population[0].fitness/this.data.length+"").slice(0,4));
   return this.population;
 }
 

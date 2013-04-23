@@ -49,7 +49,7 @@ function Data(row){
 
 function Load_File(_filename) {
   var filename = _filename || DATA_FILE
-  console.time(filename);
+  //console.time(filename);
   var data = fs.readFileSync(filename).toString();
   var rows = data.split('\n');
   for(var i = 0; i < rows.length; i++) {
@@ -82,11 +82,8 @@ function Load_File(_filename) {
     i++;
   }
 
-  console.timeEnd(filename);
+  //console.timeEnd(filename);
   return ret;//rows;
-
-  console.timeEnd(filename);
-  return rows.splice(0,3000);
 } //Load_File()
 
 module.exports = {
