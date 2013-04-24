@@ -138,7 +138,7 @@ NeuralNetwork.prototype.toString = function(){
       inputs[i] = new Object();
       inputs[i].ins = inputs[i].outs = 0;
     }
-    if (i < 3){
+    if (i < OUTPUT_END - OUTPUT_START){
       outputs[i] = new Object();
       outputs[i].ins = outputs[i].outs = 0;
     }
@@ -171,17 +171,17 @@ NeuralNetwork.prototype.toString = function(){
     }
   }
   
-  
+  var q = (NUM_IN - MAX_NUM_LYR)/2; 
   for (var i = 0; i < MAX_IN_LYR; i++){
     var str = "";
-    if (i > 3 && i < 46)
-      str += "("+inputs[i-4].ins+","+inputs[i-4].outs+")";
+    if (i < NUM_IN)
+      str += "("+inputs[i].ins+","+inputs[i].outs+")";
     str += "\t";
     str += "("+l(hidden1[i].ins)+","+l(hidden1[i].outs)+")  ";
     str += "("+l(hidden2[i].ins)+","+l(hidden2[i].outs)+")  ";
     str += "("+l(hidden3[i].ins)+","+l(hidden3[i].outs)+")  ";
-    if (i > 24 && i < 28)
-      str += "("+outputs[i-25].ins+","+outputs[i-25].outs+")";
+    if (i < NUM_OUT)
+      str += "("+outputs[i].ins+","+outputs[i].outs+")";
     console.log(str);
   }
 

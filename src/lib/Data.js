@@ -64,7 +64,7 @@ function Data(row){
       this.output[i] = 0;
     this.output[this.idx] = 1;
   }
-  console.log(this);
+  // console.log(this);
 } //Data()
 
 

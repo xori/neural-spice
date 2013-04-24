@@ -28,6 +28,7 @@ for(var g = 0; g < globals.generations; g++) {
   worst = population.slice(-1)[0].fitness  / data.length;
   best  = population[0].fitness / data.length;
   console.log(g+", "+best+", "+average+", "+worst);
+  population[population.length-1].network.toString();
 }
 
 return;
