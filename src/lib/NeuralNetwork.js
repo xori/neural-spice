@@ -1,10 +1,18 @@
 
 var g = require('../config.js');
 
-var NUM_IN = 42;
-var NUM_OUT = 3;
-var MAX_IN_LYR = 50;
-var MAX_NUM_LYR = 3;
+if (g.data_type == "connect4"){
+  var NUM_IN = 42;
+  var NUM_OUT = 3;
+  var MAX_IN_LYR = 50;
+  var MAX_NUM_LYR = 3;
+}
+if (g.data_type == "wines"){
+  var NUM_IN = 11;
+  var NUM_OUT = 11;
+  var MAX_IN_LYR = 30;
+  var MAX_NUM_LYR = 3;
+}
 var TOTAL_NEURONS = NUM_IN+NUM_OUT + MAX_NUM_LYR*MAX_IN_LYR;
 
 var INPUT_START  = 0;

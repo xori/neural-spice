@@ -65,6 +65,7 @@ function intersect(nn1,nn2){
 Chromosome.prototype.mutate = function(){
   var val = Math.random();
   var num = 4;
+  for (var i = 0; i < 13; i++)
   if (val < 1/num)
     add_neuron(this);
   else if (val < 2/num)

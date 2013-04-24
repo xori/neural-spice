@@ -6,7 +6,8 @@ var globals = {
 	mutation	: 0.2,
 	crossover	: 0.8,
 	tournament_size: 50,
-	data_size : 18000, //max 18000
+	data_size : 33, //max 18000 for connect 4, 6497 for wine
+  data_type : "wines",
 	//whatever	
   random    : function(){ return(2*Math.random() - 1); },
   tanh      : function(x){ return( (Math.exp(2*x)-1) / (Math.exp(2*x)+1) ); },
