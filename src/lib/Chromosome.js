@@ -12,10 +12,39 @@ function Chromosome(){
     union & intersection - networks must have same # of hidden layers
 **/
 Chromosome.prototype.crossover = function(chromo){
+  /*
   if (Math.random() < 0.5)
     return(union(chromo.network,this.network));
   return(intersect(chromo.network,this.network));
+  */
+  return(uniform_order(chromo.network,this.network);
 } //Chromosome.crossover(Chromosome)
+
+
+/**
+ * uniform_order(NeuralNetwork,NeuralNetwork)
+ * Returns a uniform order child of the two networks.
+**/
+function uniform_order(nn1,nn2){
+  var child = new Chromosome();
+  var matrix = new Array();
+  for (var i = 0; i < NeuralNetwork.TOTAL_NEURONS; i++){
+    matrix[i] = new Array();
+    for (var j = i+1; j < NeuralNetwork.TOTAL_NEURONS; j++)
+      matrix[i][j] = (Math.random() < 0.5) ? 1 : 0;
+  }
+
+  for (var i = 0; i < NeuralNetwork.TOTAL_NEURONS; i++)
+    for (var j = i+1; j < NeuralNetwork.TOTAL_NEURONS; j++)
+      if (matrix[i][j]){
+        matrix[i][j] = nn1.matrix[i][j];
+      }
+      else {
+        matrix[i][j] = nn2.matrix[i][j];
+      }
+  child.network.matrix = matrix;
+  return(child);
+} //uniform_order(NeuralNetwork,NeuralNetwork
 
 /**
  * union(NeuralNetwork,NeuralNetwork)
