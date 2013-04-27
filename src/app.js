@@ -20,7 +20,7 @@ for(var g = 0; g < globals.generations; g++) {
   // Perform mutation/crossover
   ga.breed();
 
-  population = ga.tick();  
+  population = ga.tick();
   // Do statistics
   for(var i = 0, average = 0; i < population.length; i++)
     average += population[i].fitness;
@@ -28,7 +28,7 @@ for(var g = 0; g < globals.generations; g++) {
   worst = population.slice(-1)[0].fitness  / data.length;
   best  = population[0].fitness / data.length;
   console.log(g+", "+best+", "+average+", "+worst);
-  population[population.length-1].network.toString();
+  //population[population.length-1].network.toString();
 }
 
 return;

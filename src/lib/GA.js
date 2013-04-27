@@ -20,7 +20,7 @@ GA.prototype.inital = function(popsize_override) {
   if(this.config.verbose) console.time("Generate Inital Pop");
   for(var p = 0; p < pop_size; p++) {
     network = new Chromosome();
-    for(var i = 0; i < 500; i++) {
+    for(var i = 0; i < 50; i++) {
       network.mutate();
     }
     this.population.push(network);
@@ -42,7 +42,7 @@ GA.prototype.tick = function(first) {
       if(this.population[indv].network.test(this.data[i])) {
         this.population[indv].fitness++;
       }
-      process.stderr.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
+      //process.stderr.write("\r(I:"+((indv/this.population.length)*100+"").slice(0,2)+"%,D:"+((i/this.data.length)*100+"").slice(0,4)+"%)");
     } //no need to normalize, sweet
   }
   this.population.sort(function(a,b){return b.fitness-a.fitness});
