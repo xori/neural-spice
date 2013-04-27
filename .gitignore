@@ -2,3 +2,5 @@ src/node_modules
 src/*~
 *.swp
 *~
+output/wines
+output/connect4
