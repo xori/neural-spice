@@ -4,3 +4,11 @@ src/*~
 *~
 output/wines
 output/connect4
+
+*.dvi
+*.fdb*
+*.fls
+*.aux
+*.log
+*.synctex.gz
+
