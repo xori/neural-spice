@@ -87,15 +87,17 @@ function intersect(nn1,nn2){
 **/
 Chromosome.prototype.mutate = function(){
   var val = Math.random();
-  var num = 4;
+  var num = 6;
   if (val < 1/num)
     add_neuron(this);
   else if (val < 2/num)
     remove_neuron(this);
   else if (val < 3/num)
     add_synapse(this);
-  else if (val < 4/num);
+  else if (val < 4/num)
     remove_synapse(this);
+  else if (val < 6/num) //provide double the chance for less destructive mutations
+    change_synapse(this);
 } //Chromosome.mutate()
 
 
@@ -154,7 +156,6 @@ function add_synapse(chromo){
   chromo.network.matrix[from][to] = g.random();
 } //add_synapse(Chromosome)
 
-
 function remove_synapse(chromo){
   var tries = 20000;
   for (var i = 0; i < tries; i++){
@@ -166,5 +167,19 @@ function remove_synapse(chromo){
     }
   }
 } //remove_synapse(Chromosome)
+
+// A less destructive mutations. I know add synapse technically does this, I just 
+// wanted to see the results.
+function change_synapse(chromo){
+  var tries = 20000;
+  for (var i = 0; i < tries; i++){
+    var from = parseInt(Math.random() * (NeuralNetwork.TOTAL_NEURONS-1));
+    var to =   parseInt(from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1));
+    if (chromo.network.matrix[from][to]){
+      chromo.network.matrix[from][to] = Math.random();
+      return; //only remove one
+    }
+  }
+} //change_synapse(Chromosome)
 
 module.exports = Chromosome;

@@ -59,20 +59,42 @@ A node calculates its output value by summing the output of all of its predecess
 
 In the Figure \ref{fig:NeuralNetwork} there is only one hidden layer, but in our experiments we are evolving a network that can have up to three hidden layers. 
 
+% Talk about backprop.
+
   \subsection{Genetic Algorithms}
-  Genetic Algorithms or GAs are another mathematical model for finding an optimized solution in a large search space. This model is based off of Darwinian Evolution in that the best performing current solutions are bred together mixing genetic information from both parents into their children. These children are then evaluated, just as their parents were, and subjugated to the same breeding rules. 
+  Genetic Algorithms or GAs are another mathematical model for finding an optimized solution in a large search space. This model is based off of Darwinian Evolution in that the best performing current solutions are bred together mixing genetic information from both parents into their children (known as a crossover operation). These children are then evaluated, just as their parents were, and subjugated to the same breeding rules. 
   
-  Like in biological evolution corruption of the genetic code can happen, this is a possibily destructive mutation that encourages diversity between parents. 
+  Like in biological evolution corruption of the genetic code can happen, this is a possibly destructive mutation that encourages diversity between parents. This mutation can provide new genetic code to the child that it might benefit from that it couldn't have received from the parents. 
   %This sets this optimization technique apart from traditional hill climbers that don't introduce
 
-In this experiment a GA is used to optimize the structure \amp weights of
+  The difficulty of this search method is programically defining the layout of the genetic code (a Chromosome) and creating different mutation and crossover functions that hopefully it can benefit from. 
 
 \section{Methodology}
+This goal of this experiment is to use a GA to optimize a neural network and compare the result to that of a vanilla neural network trained by back propagation. The following are the graph operations that were chosen as the crossover and mutation functions.
   \subsection{Mutations}
-    Our custom mutations.
+  Mutations are possibly destructive operations that encourage diversity and explore the search space. All of these mutations where weighted the same and had the same chance of being used in all of the experiments.
+    % Trying to keep all titles as "graph based" as possible.
+    \subsubsection{Add Node}
+      If the current graph allows for more nodes add one in the first possible hidden layer and connect it to any proceeding nodes behind it. For each new output edge from this node, randomize the weight associated with it. So while the node might be `fully connected' to all proceeding nodes, as the weight approaches 0 that edge effectively becomes disconnected.
+      
+      This function can only add nodes to the hidden layers of the neural networks. The input and output layers have a fixed amount of nodes that must exist, but can be disconnected.
+    \subsubsection{Remove Node}
+      This randomly selects a non-output node with connections and removes all outgoing connections. This function can disconnect input layer nodes. This could be considered beneficial to the network as `feature selection' and could remove data that could potentially add noise to the input layer, and then get propagated down the line.
+    \subsubsection{Add Edge}
+      This method selects a random edge and changes its value.
+      
+      If the edge does not exist it is created with a uniformly distributed `weight of connectivity' ranging from $ [0...1) $. 
+      If the edge does exist, a new value within the same range is given and the weight is overridden.
+    \subsubsection{Remove Edge}
+      Randomly selects a connected edge to remove. There is no restriction in what layer this can happen. 
+	%\subsubsection{Change Edge Weight}  
   \subsection{Crossovers}
-    Our custom crossovers.
-
+  Crossovers build off of existing solutions and exploit the genetic code we have found thus far to be useful. 
+    \subsubsection{Union}
+	A union of all nodes and edges of the two graphs, if two edges exist on the two graphs then weights of both edges are averaged and this value becomes the new weight in the child.
+    \subsubsection{Intersection}
+    \subsubsection{Whatever}
+    
 \section{Experiments}
   \subsection{Connect 4}
     Description of Connect 4 Problem
