@@ -1,4 +1,3 @@
-
 \documentclass[journal]{IEEEtran}
 \usepackage{lmodern}
 \usepackage{amsfonts}
@@ -70,6 +69,7 @@ In the Figure \ref{fig:NeuralNetwork} there is only one hidden layer, but in our
   The difficulty of this search method is programically defining the layout of the genetic code (a Chromosome) and creating different mutation and crossover functions that hopefully it can benefit from. 
 
 \section{Methodology}
+%Maybe pictures for each mutation/crossover?
 This goal of this experiment is to use a GA to optimize a neural network and compare the result to that of a vanilla neural network trained by back propagation. The following are the graph operations that were chosen as the crossover and mutation functions.
   \subsection{Mutations}
   Mutations are possibly destructive operations that encourage diversity and explore the search space. All of these mutations where weighted the same and had the same chance of being used in all of the experiments.
@@ -91,9 +91,37 @@ This goal of this experiment is to use a GA to optimize a neural network and com
   \subsection{Crossovers}
   Crossovers build off of existing solutions and exploit the genetic code we have found thus far to be useful. 
     \subsubsection{Union}
-	A union of all nodes and edges of the two graphs, if two edges exist on the two graphs then weights of both edges are averaged and this value becomes the new weight in the child.
+	  A union of all nodes and edges of the two graphs, if two edges exist on the two graphs then weights of both edges are averaged and this value becomes the new weight in the child.
+	  
+	  This is a crossover that can easily create bloat in the child that doesn't help it in any way.
+	  This child now has the superior genetic code of both parents with all of the unhelpful (malignant) 
+	  mutations from both.
+
+    \subsubsection{Roulette Union}
+    An alteration to the standard union function. Instead of merging both parents into one child,
+    when building the new child, pick one aspect (node or edge) from a randomly selected parent.
+    
+    If both parents have a connection from node $ A \rightarrow B $ then there is a 100\% chance
+    that the edge $A \rightarrow B$ exists. If one parent has a connection $A \rightarrow B$ and
+    the other doesn't, then there is a 50/50 chance of the child receiving the link or not,
+    compared to inheriting all edges like the previous mentioned union.
+    
+    This is done for all aspects of both parents, if both parents have the same aspect it will
+    for sure show up in the child. This is more how biological evolution works wherein the 
+    Chromosome is built from a random selection of a little of Parent A and a little of Parent B.
+    
+	  
     \subsubsection{Intersection}
-    \subsubsection{Whatever}
+    The intersection function is a `clean-up' function, but can be very destructive if there
+    is too much diversity between two parents. Just like in biological evolution if there is
+    too much difference between the parents (different species) the child may not be as functional
+    as each of the parents.
+    
+    When this type of crossover is selected, all edges and nodes that both parents share get
+    passed onto the child. All other nodes/edges that are not shared by \textbf{both} parents
+    is discarded. 
+    
+    This function helps to reduce bloat that is created from the different mutations.
     
 \section{Experiments}
   \subsection{Connect 4}
