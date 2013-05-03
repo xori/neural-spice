@@ -70,28 +70,44 @@ In the Figure \ref{fig:NeuralNetwork} there is only one hidden layer, but in our
 
 \section{Methodology}
 %Maybe pictures for each mutation/crossover?
-This goal of this experiment is to use a GA to optimize a neural network and compare the result to that of a vanilla neural network trained by back propagation. The following are the graph operations that were chosen as the crossover and mutation functions.
+This goal of this experiment is to use a GA to optimize a neural network and compare the result 
+to that of a vanilla neural network trained by back propagation. The following are the graph 
+operations that were chosen as the crossover and mutation functions.
   \subsection{Mutations}
-  Mutations are possibly destructive operations that encourage diversity and explore the search space. All of these mutations where weighted the same and had the same chance of being used in all of the experiments.
+  Mutations are possibly destructive operations that encourage diversity and explore the search 
+  space. All of these mutations where weighted the same and had the same chance of being used 
+  in all of the experiments.
     % Trying to keep all titles as "graph based" as possible.
     \subsubsection{Add Node}
-      If the current graph allows for more nodes add one in the first possible hidden layer and connect it to any proceeding nodes behind it. For each new output edge from this node, randomize the weight associated with it. So while the node might be `fully connected' to all proceeding nodes, as the weight approaches 0 that edge effectively becomes disconnected.
+      If the current graph allows for more nodes add one in the first possible hidden layer and 
+      connect it to any proceeding nodes behind it. For each new output edge from this node, 
+      randomize the weight associated with it. So while the node might be `fully connected' to 
+      all proceeding nodes, as the weight approaches 0 that edge effectively becomes disconnected.
       
-      This function can only add nodes to the hidden layers of the neural networks. The input and output layers have a fixed amount of nodes that must exist, but can be disconnected.
+      This function can only add nodes to the hidden layers of the neural networks. The input and
+       output layers have a fixed amount of nodes that must exist, but can be disconnected.
+       
     \subsubsection{Remove Node}
-      This randomly selects a non-output node with connections and removes all outgoing connections. This function can disconnect input layer nodes. This could be considered beneficial to the network as `feature selection' and could remove data that could potentially add noise to the input layer, and then get propagated down the line.
+      This randomly selects a non-output node with connections and removes all outgoing 
+      connections. This function can disconnect input layer nodes. This could be considered 
+      beneficial to the network as `feature selection' and could remove data that could 
+      potentially add noise to the input layer, and then get propagated down the line.
+      
     \subsubsection{Add Edge}
       This method selects a random edge and changes its value.
       
-      If the edge does not exist it is created with a uniformly distributed `weight of connectivity' ranging from $ [0...1) $. 
+      If the edge does not exist it is created with a uniformly distributed `weight of connectivity'
+      ranging from $ [0...1) $. 
       If the edge does exist, a new value within the same range is given and the weight is overridden.
+      
     \subsubsection{Remove Edge}
       Randomly selects a connected edge to remove. There is no restriction in what layer this can happen. 
 	%\subsubsection{Change Edge Weight}  
   \subsection{Crossovers}
   Crossovers build off of existing solutions and exploit the genetic code we have found thus far to be useful. 
     \subsubsection{Union}
-	  A union of all nodes and edges of the two graphs, if two edges exist on the two graphs then weights of both edges are averaged and this value becomes the new weight in the child.
+	  A union of all nodes and edges of the two graphs, if two edges exist on the two graphs then 
+	  weights of both edges are averaged and this value becomes the new weight in the child.
 	  
 	  This is a crossover that can easily create bloat in the child that doesn't help it in any way.
 	  This child now has the superior genetic code of both parents with all of the unhelpful (malignant) 
@@ -123,9 +139,46 @@ This goal of this experiment is to use a GA to optimize a neural network and com
     
     This function helps to reduce bloat that is created from the different mutations.
     
+% maybe this should go infront of methodology.
 \section{Experiments}
+  The purpose of this project is to compare results of vanilla backpropation to the results of
+  a Genetic Algorithm applied to optimizing a neural network's weights and topography. 
+  
+  Traditionally a comparison like this only focuses on the GA optimizing the weights \textbf{or}
+  the topography of the neural net. We have attempted to do both simultaniously. To compare fairly
+  choose two problems that would be challenging.
+  
+  The first problem is in need of feature reduction with it's many inputs and few possible outputs.
+  
+  The second problem is a noisy data problem with many key variables it must compare for the final
+  result.
+
   \subsection{Connect 4}
-    Description of Connect 4 Problem
+   This dataset contains all legal 8-ply positions in the game of
+   connect-4 in which neither player has won yet, and in which the next
+   move is not forced.    
+   
+   The input is the full state of the board (who is in each position) and the expected output
+   is either `win', 'loss' or 'draw' for the `first player'.
+   
+   This experiment's description could be simplified to creating a neural network as the heuristic
+   function of a connect-4 board.
+   
+   \begin{table}[here]
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Connect 4 Parameters}
+    \label{E1}
+    \centering
+    \begin{tabular}{r||l}
+      \hline
+      Generations & 20  \\ \hline
+      Crossover   & 0.8 \\ \hline
+      Mutation    & 0.2 \\ \hline
+      Running Time & 32 min/gen* \\ \hline
+      % Other stuff.
+    \end{tabular}
+   \end{table}
+    
   \subsection{Quality of Wines}
     Description of Wines Problem
   \subsection{Experiment Setup}
