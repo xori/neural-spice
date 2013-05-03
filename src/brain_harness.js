@@ -7,17 +7,17 @@ var net = new brain.NeuralNetwork({
   hiddenLayers : [ 30 ]
 });
 
+console.log(JSON.stringify(require('./config.js')));
+console.log("Iteration, Training Error, Correct Rate");
 net.train(data,{
-  errorThresh: 0.004,
+  errorThresh: 0,
   iterations: 1000,
-  log: true,
-  logPeriod: 10,
   callback: test_brain,
   callbackPeriod: 10
 });
 
 
-function test_brain(error,iterations){
+function test_brain(state){
   var rate = 0;
   for (var i = 0; i < test_data.length; i++){
     var output = net.run(test_data[i].input);
@@ -31,5 +31,5 @@ function test_brain(error,iterations){
     if (idx == data[i].idx)
       rate++;
   }
-  console.log("correct "+(rate/data.length));
+  console.log(state.iterations+", "+state.error+", "+(rate/test_data.length));
 }
