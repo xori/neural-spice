@@ -173,14 +173,14 @@ function remove_synapse(chromo){
 function change_synapse(chromo){
   var tries = 20000;
   for (var repeat = 0; repeat < 5; repeat++) {
-  for (var i = 0; i < tries; i++){
-    var from = parseInt(Math.random() * (NeuralNetwork.TOTAL_NEURONS-1));
-    var to =   parseInt(from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1));
-    if (chromo.network.matrix[from][to]){
-      chromo.network.matrix[from][to] = Math.random();
-      return; //only remove one
+    for (var i = 0; i < tries; i++){
+      var from = parseInt(Math.random() * (NeuralNetwork.TOTAL_NEURONS-1));
+      var to =   parseInt(from + Math.random() * (NeuralNetwork.TOTAL_NEURONS-from+1));
+      if (chromo.network.matrix[from][to]){
+        chromo.network.matrix[from][to] = Math.random();
+        break; //change only one
+      }
     }
-  }
   }
 } //change_synapse(Chromosome)
 
