@@ -28,17 +28,18 @@ Evan~Verworn~(4582938)~\textless{}ev09qz@brocku.ca\textgreater% <-this % stops a
 \begin{abstract}
   The purpose of this experiment was to compare the results of training artificial neural networks
   through standard backpropation and using a genetic algorithm. The genetic algorithm altered both
-  the structure and weights of the network to attempt to encourage learning.
+  the structure and weights of the network to attempt to further encourage learning.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-\IEEEPARstart{T}{his}
-restate abstract and state results a;sodghf;laksjdhfnpva;shdflnoakesjdhxbf kcjzsdujv jvkjzdsxhhjfvf
+\IEEEPARstart{T}{his} experiment saught to compare the results of neural network learning by backpropation
+versus using a genetic algorithm. The genetic algorithm would evolve the structure and synaptic weights
+of the network simultaneously, attempting to optimize all the parameters. We found that the genetic algorithm
+performed better overall on average, but may not have been worth the additional computation time.
 
 \section{Background}
-
 % I don't think we'd have to write much on this and GAs.
 % I think about the same as a wikipedia summary.
   \subsection{Neural Networks}
@@ -58,7 +59,7 @@ The output is \textit{trained} to the desired output through manipulating the we
 intermediate (hidden) and output layer edges.
 
 \begin{figure}[here]
-  \[  node\_output = \sum_{i=1}^{n} w_{i} x_{i} \]
+  \[  NodeOutput = \sum_{i=1}^{n} w_{i} x_{i} \]
   \caption{Where $n$ is the number of edges coming \textit{into} this node, $w$ is the weight
   associated with that edge and x is the output value produced by the predecessor node.}
   \label{fig:NodeOutput}
@@ -70,6 +71,8 @@ between 0 and 1 by a Sigmoid function.
 
 In the Figure \ref{fig:NeuralNetwork} there is only one hidden layer, but in our experiments we
 are evolving a network that can have up to three hidden layers.
+
+In this experiment, \texttt{brainjs} (written by Heather Arthur) was used for the backpropation learning.\cite{brain}
 
 % Talk about backprop.
 \subsubsection*{Learning}
@@ -331,6 +334,10 @@ Blah-de-Blah.
 
 \bibitem{lachlan}
 Lachlan Plant, Graph Theory Consultant
+
+\bibitem{brain}
+"brainjs" Retrieved April 2013 from
+http://harthur.github.io/brain/
 
 \bibitem{wine}
   P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis. 
