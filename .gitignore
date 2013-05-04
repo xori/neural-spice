@@ -12,3 +12,4 @@ output/connect4
 *.log
 *.synctex.gz
 *.bak
+**Thumbs.db
