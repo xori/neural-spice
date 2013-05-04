@@ -18,13 +18,17 @@
 \begin{document}
 \title{Analysis of Genetic Algorithms Optimizing Topological Layout and Synaptic Weights }
 
-\author{Taras~Mychaskiw(4105797)~\textless{}tm07qx@brocku.ca\textgreater\\%
+\author{Taras~Mychaskiw~(4105797)~\textless{}tm07qx@brocku.ca\textgreater\\%
 Evan~Verworn~(4582938)~\textless{}ev09qz@brocku.ca\textgreater% <-this % stops a space
 }
 
+
 \maketitle
 
-\begin{abstract}ah Blah Blah Blah Blah Blah Blah.
+\begin{abstract}
+  The purpose of this experiment was to compare the results of training artificial neural networks
+  through standard backpropation and using a genetic algorithm. The genetic algorithm altered both
+  the structure and weights of the network to attempt to encourage learning.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -67,6 +71,51 @@ In the Figure \ref{fig:NeuralNetwork} there is only one hidden layer, but in our
 are evolving a network that can have up to three hidden layers.
 
 % Talk about backprop.
+\subsubsection*{Learning}
+A neural network learns by examples. Training examples are fed into the network, and the network changes
+the synapse weights so that when training is complete, the network will produce the required results when
+fed new problems it has not seen during training. The learning process is called \textit{Back-Propagation}.\cite{slides}
+
+  \subsubsection*{Gradient Descent}
+  Gradient descent is a common first order optimization algorithm. The is the reason we use a sigmoid
+  activation function instead of the Heaviside function; the gradient of Heaviside is undefined at
+  $x=0$. Gradient descent has it's basis in vector calculus. The gradient of a multi-variable function
+  points in the direction of fastest growth of that function. The negative gradient then points in the
+  direction where the function decreases the fastest. The function, in the case for neural networks,
+  is the error of the system, $f(\omega_1,..,\omega_n)$, a function of all the weights of the network.
+  The basic gradient descent weight update rule is
+  \begin{equation}
+    \vec{\omega} \leftarrow \vec{\omega} - \nu\vec{\nabla}\xi(\omega)
+    \label{equ:grad}
+  \end{equation}
+  where $\vec{\omega}$ is the synapse weights, $\nu$ is the learning rate, and $\xi(\omega)$ is the error function.
+  The error function value can be determined during the \textit{Back-Propagation} step, then one component
+  of $\vec{\omega}$ is updated using Equation~\ref{equ:gradcomp}, where $g(\omega_i)$ is just the activation
+  function of the neuron.\cite{3p71text}
+  \begin{equation}
+    \omega_i \leftarrow \omega_i - \nu\frac{\partial}{\partial\omega_i}g(\omega_i)
+    \label{equ:gradcomp}
+  \end{equation}
+
+  \subsubsection*{Back-Propagation}
+  A network is first initialized by setting all of the synapse weights to small random numbers, usually
+  between $-1$ and $1$. A training example is fed into the network, and the output is calculated. Since
+  each weight is a random number, the network output is completely different from the target output.
+  The strategy is to calculate the error produced by each neuron. At the output layer, the error is simply
+  $TargetOutput - ActualOutput$. According to the gradient descent equations, the error at the output layer is
+  \begin{equation}
+    err = \frac{\partial}{\partial\omega}g(x) \times (TargetOutput-ActualOutput)
+    \label{equ:errorout}
+  \end{equation}
+  where $x$ is the value of the weighted sum.\\
+  Propagating the error back, the error at a hidden neuron $j$ is
+  \begin{equation}
+    err_j = \frac{\partial}{\partial\omega}g(x) \times \left(\sum\limits_i \omega_i \cdot err_i\right)
+    \label{equ:errorhidden}
+  \end{equation}
+  where $i$ is a neuron in the next layer.\\
+  Finally, with all the error function values found, the weights of all the synapses in the network
+  are updated using Equation~\ref{equ:grad}.\cite{pdf}
 
   \subsection{Genetic Algorithms}
   Genetic Algorithms or GAs are another mathematical model for finding an optimized solution
@@ -294,6 +343,12 @@ Dunn, J. (1974). "Well separated clusters and optimal fuzzy partitions". Journal
   P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis. 
   Modeling wine preferences by data mining from physicochemical properties.
   In Decision Support Systems, Elsevier, 47(4):547-553. ISSN: 0167-9236.
+
+\bibitem{pdf}
+"The Backpropagation Algorithm" Retrieved February 2013 from
+http://www4.rgu.ac.uk/files/chapter3 - bp.pdf
+\bibitem{slides}
+Ombuki-Berman, B. "COSC 4P80 Lecture Slides" Brock University, Winter 2012/13
 
 \end{thebibliography}
 
