@@ -4,7 +4,7 @@ var Data = require('./lib/Data.js');
 var data = Data.loadFile();
 var test_data = Data.loadFile();
 var net = new brain.NeuralNetwork({
-  hiddenLayers : [ 30 ]
+  hiddenLayers : [ 30,30,30 ]
 });
 
 console.log(JSON.stringify(require('./config.js')));
