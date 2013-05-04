@@ -1,6 +1,7 @@
 \documentclass[journal]{IEEEtran}
 \usepackage{lmodern}
 \usepackage{amsfonts}
+\usepackage{float}
 %\usepackage{hyperref}
 
 \usepackage{cite}
@@ -180,23 +181,6 @@ operations that were chosen as the crossover and mutation functions.
    This experiment's description could be simplified to creating a neural network as the heuristic
    function of a connect-4 board.
 
-   \begin{table}[here]
-    \renewcommand{\arraystretch}{1.3}
-    \caption{Connect 4 Parameters}
-    \label{E1}
-    \centering
-    \begin{tabular}{r||l}
-      \hline
-      Generations & 20  \\ \hline
-      Crossover   & 0.8 \\ \hline
-      Mutation    & 0.2 \\ \hline
-      Running Time & 32 min/gen* \\ \hline
-      Training    & ~16000 \\ \hline
-      Testing     & Dunno \\ \hline
-      % Other stuff.
-    \end{tabular}
-   \end{table}
-
   \subsection{Quality of Wines}
   Two datasets were created, using red and white wine samples.
   The inputs include objective tests (e.g. PH values) and the output is based on sensory data
@@ -210,20 +194,20 @@ operations that were chosen as the crossover and mutation functions.
 
   The expected output is a single value between 0 and 10.
 
-  \begin{table}[here]
+  \begin{table}[H]
     \renewcommand{\arraystretch}{1.3}
     \caption{Wine Quality Parameters}
     \label{E2}
     \centering
-    \begin{tabular}{r||l}
-      \hline
-      Generations & 100  \\ \hline
-      Crossover   & 0.8 \\ \hline
-      Mutation    & 0.2 \\ \hline
-      Running Time & 5 min/gen* \\ \hline
-      Training    & ~6000 \\ \hline
-      Testing     & Dunno \\ \hline
-      % Other stuff.
+    \begin{tabular}{r|cccc}
+	Run & 1 & 2 & 3 & 4 \\
+	Generations & 20 & 70 & 100 & 100 \\
+	Population & 200 & 200 & 200 & 100 \\
+	Crossover & 0.8 & 0.8 & 0.8 & 0.8 \\
+	Mutation & 0.2 & 0.2 & 0.2 & 0.2 \\
+	Tournament Size & 50 & 50 & 50 & 50 \\
+	Data Type & C4 & W & W & W \\
+	Data Size & 18000 & 6000 & 6000 & 1000 \\
     \end{tabular}
    \end{table}
 
