@@ -1,7 +1,6 @@
 \documentclass[journal]{IEEEtran}
 \usepackage{lmodern}
 \usepackage{amsfonts}
-\usepackage{float}
 %\usepackage{hyperref}
 
 \usepackage{cite}
@@ -127,7 +126,7 @@ operations that were chosen as the crossover and mutation functions.
 
     This is a crossover that can easily create bloat in the child that doesn't help it in any way.
     This child now has the superior genetic code of both parents with all of the unhelpful (malignant)
-    mutations from both.
+    mutations from both. \cite{lachlan}
 
     \subsubsection{Roulette Union}
     An alteration to the standard union crossover. Instead of merging both parents into
@@ -152,7 +151,7 @@ operations that were chosen as the crossover and mutation functions.
 
     When this type of crossover is selected, all edges and nodes that both parents share get
     passed onto the child. All other nodes/edges that are not shared by \textbf{both} parents
-    is discarded.
+    is discarded.  \cite{lachlan}
 
     This function helps to reduce bloat that is created from the different mutations.
 
@@ -194,7 +193,7 @@ operations that were chosen as the crossover and mutation functions.
 
   The expected output is a single value between 0 and 10.
 
-  \begin{table}[H]
+  \begin{table}[here]
     \renewcommand{\arraystretch}{1.3}
     \caption{Wine Quality Parameters}
     \label{E2}
@@ -214,12 +213,51 @@ operations that were chosen as the crossover and mutation functions.
 \section{Analysis}
 	\subsection{Connect 4}
 		\subsubsection{Union/Intersect}
+			\begin{figure}[here]%[!t]
+			  \centering
+			  \includegraphics[width=3.4in]{connect4_performance_new}
+			  \caption{An example single hidden layer neural network.}
+			  \label{fig:connect4_performance_new}
+			\end{figure}
 		\subsubsection{Vanilla Backprop}
+			\begin{figure}[here]%[!t]
+			  \centering
+			  \includegraphics[width=3.4in]{brain_connect4}
+			  \caption{An example single hidden layer neural network.}
+			  \label{fig:brain_connect4}
+			\end{figure}
+			
 	\subsection{Wine Quality}
 		\subsubsection{Union/Intersect}
+			\begin{figure}[here]%[!t]
+			  \centering
+			  \includegraphics[width=3.4in]{wine_performance_new}
+			  \caption{An example single hidden layer neural network.}
+			  \label{fig:wine_performace_new}
+			\end{figure}
+
 		\subsubsection{Uniform}
+			\begin{figure}[here]%[!t]
+			  \centering
+			  \includegraphics[width=3.4in]{wine_uniform}
+			  \caption{An example single hidden layer neural network.}
+			  \label{fig:wine_uniform}
+			\end{figure}
+			
 		\subsubsection{Change}
+			\begin{figure}[here]%[!t]
+			  \centering
+			  \includegraphics[width=3.4in]{wine_change_edge}
+			  \caption{An example single hidden layer neural network.}
+			  \label{fig:wine_change_edge}
+			\end{figure}
 		\subsubsection{Vanilla Backprop}
+			\begin{figure}[here]%[!t]
+			  \centering
+			  \includegraphics[width=3.4in]{brain_wine}
+			  \caption{An example single hidden layer neural network.}
+			  \label{fig:brain_wine}
+			\end{figure}
 		
 \section{Conclusion}
 Things could have done better.
