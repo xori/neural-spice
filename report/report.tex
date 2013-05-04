@@ -129,8 +129,9 @@ operations that were chosen as the crossover and mutation functions.
     mutations from both.
 
     \subsubsection{Roulette Union}
-    An alteration to the standard union function. Instead of merging both parents into one child,
-    when building the new child, pick one aspect (node or edge) from a randomly selected parent.
+    An alteration to the standard union crossover. Instead of merging both parents into
+    one child, a coin is flipped which decides which parent to take an edge from. If heads, then
+    the edge from Parent A is copied exactly, else the edge from Parent B is copied.
 
     If both parents have a connection from node $ A \rightarrow B $ then there is a 100\% chance
     that the edge $A \rightarrow B$ exists. If one parent has a connection $A \rightarrow B$ and
