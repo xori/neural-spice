@@ -282,19 +282,19 @@ operations that were chosen as the crossover and mutation functions.
       \end{figure}
       From Figure \ref{fig:connect4_performance_new} and Figure \ref{fig:brain_connect4}
       we can see that the Connect 4 problem is computationally hard to learn, and may not
-	  be worth it when each generation takes 32 minutes long.
+    be worth it when each generation takes 32 minutes long.
       
       Unfortunately when looking at Figure \ref{fig:connect4_performace_new} it can be seen
-	  that very little learning occurs over the course of the experiment. Random guessing 
-	  which should (for this problem) result in a fitness of 0.33. This is what the average
-	  population starts at. The average population at the end of the experiment is only ~0.35
-	  leading me to speculate that all `learning' that occured was a result of random search.
-	  This is further supported by the `best' in all runs having a fitness of 0.44 in generation 0 and only
-	  increasing to 0.47 by generation 20.
-	  
-	  With these findings it can be concluded with the standard Union and Crossover functions
-	  mentioned above would not be benifitial to encourage learning for this problem.
-	  
+    that very little learning occurs over the course of the experiment. Random guessing 
+    which should (for this problem) result in a fitness of 0.33. This is what the average
+    population starts at. The average population at the end of the experiment is only ~0.35
+    leading me to speculate that all `learning' that occured was a result of random search.
+    This is further supported by the `best' in all runs having a fitness of 0.44 in generation 0 and only
+    increasing to 0.47 by generation 20.
+    
+    With these findings it can be concluded with the standard Union and Crossover functions
+    mentioned above would not be benifitial to encourage learning for this problem.
+    
     \subsubsection*{Vanilla Backprop}
       \begin{figure}[here]%[!t]
         \centering
@@ -302,6 +302,8 @@ operations that were chosen as the crossover and mutation functions.
         \caption{An example single hidden layer neural network.}
         \label{fig:brain_connect4}
       \end{figure}
+    
+    When looking at Figure 
       
   \subsection{Wine Quality}
     \subsubsection*{Run 3) Union/Intersect}
@@ -327,7 +329,7 @@ operations that were chosen as the crossover and mutation functions.
         \caption{An example single hidden layer neural network.}
         \label{fig:wine_change_edge}
       \end{figure}
-	  
+    
     \subsubsection{Vanilla Backprop}
       \begin{figure}[here]%[!t]
         \centering
