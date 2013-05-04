@@ -1,0 +1,8 @@
+
+
+node app > $(hostname)1.csv &
+node app > $(hostname)2.csv &
+node app > $(hostname)3.csv &
+node app > $(hostname)4.csv &
+
+ 
