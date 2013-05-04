@@ -34,7 +34,8 @@ Evan~Verworn~(4582938)~\textless{}ev09qz@brocku.ca\textgreater% <-this % stops a
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-\IEEEPARstart{T}{his} should be written last. Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah.
+\IEEEPARstart{T}{his}
+restate abstract and state results a;sodghf;laksjdhfnpva;shdflnoakesjdhxbf kcjzsdujv jvkjzdsxhhjfvf
 
 \section{Background}
 
@@ -177,6 +178,25 @@ operations that were chosen as the crossover and mutation functions.
     This child now has the superior genetic code of both parents with all of the unhelpful (malignant)
     mutations from both. \cite{lachlan} %ROBOTS IN DISGUISE
 
+    \subsubsection{Intersection}
+    The intersection function is a `clean-up' function, but can be very destructive if there
+    is too much diversity between two parents. Just like in biological evolution if there is
+    too much difference between the parents (different species) the child may not be as functional
+    as each of the parents.
+
+    When this type of crossover is selected, all edges and nodes that both parents share get
+    passed onto the child. All other nodes/edges that are not shared by \textbf{both} parents
+    is discarded.  \cite{lachlan}
+
+    This function helps to reduce bloat that is created from the different mutations.
+
+    \begin{figure}[!here]%[!t]
+      \centering
+      \includegraphics[width=3.4in]{ga_union_intersect}
+      \caption{Example of union and intersection crossovers.}
+      \label{fig:ga_union_intersect}
+    \end{figure}
+
     \subsubsection{Roulette Union}
     An alteration to the standard union crossover. Instead of merging both parents into
     one child, a coin is flipped which decides which parent to take an edge from. If heads, then
@@ -190,19 +210,6 @@ operations that were chosen as the crossover and mutation functions.
     This is done for all aspects of both parents, if both parents have the same aspect it will
     for sure show up in the child. This is more how biological evolution works wherein the
     Chromosome is built from a random selection of a little of Parent A and a little of Parent B.
-
-
-    \subsubsection{Intersection}
-    The intersection function is a `clean-up' function, but can be very destructive if there
-    is too much diversity between two parents. Just like in biological evolution if there is
-    too much difference between the parents (different species) the child may not be as functional
-    as each of the parents.
-
-    When this type of crossover is selected, all edges and nodes that both parents share get
-    passed onto the child. All other nodes/edges that are not shared by \textbf{both} parents
-    is discarded.  \cite{lachlan}
-
-    This function helps to reduce bloat that is created from the different mutations.
 
 % maybe this should go infront of methodology.
 \section{Experiments}
@@ -248,66 +255,66 @@ operations that were chosen as the crossover and mutation functions.
     \label{E2}
     \centering
     \begin{tabular}{r|cccc}
-	Run & 1 & 2 & 3 & 4 \\
-	Generations & 20 & 70 & 100 & 100 \\
-	Population & 200 & 200 & 200 & 100 \\
-	Crossover & 0.8 & 0.8 & 0.8 & 0.8 \\
-	Mutation & 0.2 & 0.2 & 0.2 & 0.2 \\
-	Tournament Size & 50 & 50 & 50 & 50 \\
-	Data Type & C4 & W & W & W \\
-	Data Size & 18000 & 6000 & 6000 & 1000 \\
+  Run & 1 & 2 & 3 & 4 \\
+  Generations & 20 & 70 & 100 & 100 \\
+  Population & 200 & 200 & 200 & 100 \\
+  Crossover & 0.8 & 0.8 & 0.8 & 0.8 \\
+  Mutation & 0.2 & 0.2 & 0.2 & 0.2 \\
+  Tournament Size & 50 & 50 & 50 & 50 \\
+  Data Type & C4 & W & W & W \\
+  Data Size & 18000 & 6000 & 6000 & 1000 \\
     \end{tabular}
    \end{table}
 
 \section{Analysis}
-	\subsection{Connect 4}
-		\subsubsection{Union/Intersect}
-			\begin{figure}[here]%[!t]
-			  \centering
-			  \includegraphics[width=3.4in]{connect4_performance_new}
-			  \caption{An example single hidden layer neural network.}
-			  \label{fig:connect4_performance_new}
-			\end{figure}
-		\subsubsection{Vanilla Backprop}
-			\begin{figure}[here]%[!t]
-			  \centering
-			  \includegraphics[width=3.4in]{brain_connect4}
-			  \caption{An example single hidden layer neural network.}
-			  \label{fig:brain_connect4}
-			\end{figure}
-			
-	\subsection{Wine Quality}
-		\subsubsection{Union/Intersect}
-			\begin{figure}[here]%[!t]
-			  \centering
-			  \includegraphics[width=3.4in]{wine_performance_new}
-			  \caption{An example single hidden layer neural network.}
-			  \label{fig:wine_performace_new}
-			\end{figure}
+  \subsection{Connect 4}
+    \subsubsection{Union/Intersect}
+      \begin{figure}[here]%[!t]
+        \centering
+        \includegraphics[width=3.4in]{connect4_performance_new}
+        \caption{An example single hidden layer neural network.}
+        \label{fig:connect4_performance_new}
+      \end{figure}
+    \subsubsection{Vanilla Backprop}
+      \begin{figure}[here]%[!t]
+        \centering
+        \includegraphics[width=3.4in]{brain_connect4}
+        \caption{An example single hidden layer neural network.}
+        \label{fig:brain_connect4}
+      \end{figure}
+      
+  \subsection{Wine Quality}
+    \subsubsection{Union/Intersect}
+      \begin{figure}[here]%[!t]
+        \centering
+        \includegraphics[width=3.4in]{wine_performance_new}
+        \caption{An example single hidden layer neural network.}
+        \label{fig:wine_performace_new}
+      \end{figure}
 
-		\subsubsection{Uniform}
-			\begin{figure}[here]%[!t]
-			  \centering
-			  \includegraphics[width=3.4in]{wine_uniform}
-			  \caption{An example single hidden layer neural network.}
-			  \label{fig:wine_uniform}
-			\end{figure}
-			
-		\subsubsection{Change}
-			\begin{figure}[here]%[!t]
-			  \centering
-			  \includegraphics[width=3.4in]{wine_change_edge}
-			  \caption{An example single hidden layer neural network.}
-			  \label{fig:wine_change_edge}
-			\end{figure}
-		\subsubsection{Vanilla Backprop}
-			\begin{figure}[here]%[!t]
-			  \centering
-			  \includegraphics[width=3.4in]{brain_wine}
-			  \caption{An example single hidden layer neural network.}
-			  \label{fig:brain_wine}
-			\end{figure}
-		
+    \subsubsection{Uniform}
+      \begin{figure}[here]%[!t]
+        \centering
+        \includegraphics[width=3.4in]{wine_uniform}
+        \caption{An example single hidden layer neural network.}
+        \label{fig:wine_uniform}
+      \end{figure}
+      
+    \subsubsection{Change}
+      \begin{figure}[here]%[!t]
+        \centering
+        \includegraphics[width=3.4in]{wine_change_edge}
+        \caption{An example single hidden layer neural network.}
+        \label{fig:wine_change_edge}
+      \end{figure}
+    \subsubsection{Vanilla Backprop}
+      \begin{figure}[here]%[!t]
+        \centering
+        \includegraphics[width=3.4in]{brain_wine}
+        \caption{An example single hidden layer neural network.}
+        \label{fig:brain_wine}
+      \end{figure}
+    
 \section{Conclusion}
 Things could have done better.
 
@@ -325,18 +332,6 @@ Blah-de-Blah.
 \bibitem{lachlan}
 Lachlan Plant, Graph Theory Consultant
 
-\bibitem{SOM_KO}
-Kohonen, T. (2001
-Airs today: Monday
-     90210
-     Following, The
-     Seed
-     Tonight Show with Jay Leno, The
-     Zero Hour (US)). Self-Organizing Maps. Third, extended edition. Springer, Berlin.
-
-\bibitem{Dunn}
-Dunn, J. (1974). "Well separated clusters and optimal fuzzy partitions". Journal of Cybernetics 4
-
 \bibitem{wine}
   P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis. 
   Modeling wine preferences by data mining from physicochemical properties.
@@ -345,8 +340,12 @@ Dunn, J. (1974). "Well separated clusters and optimal fuzzy partitions". Journal
 \bibitem{pdf}
 "The Backpropagation Algorithm" Retrieved February 2013 from
 http://www4.rgu.ac.uk/files/chapter3 - bp.pdf
+
 \bibitem{slides}
 Ombuki-Berman, B. "COSC 4P80 Lecture Slides" Brock University, Winter 2012/13
+
+\bibitem{3p71text}
+Russell, S. J., and P. Norvig. "Artificial Intelligence, A Modern Approach." Pearson College Div, 2010.
 
 \end{thebibliography}
 
