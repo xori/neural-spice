@@ -213,6 +213,25 @@ operations that were chosen as the crossover and mutation functions.
     This is done for all aspects of both parents, if both parents have the same aspect it will
     for sure show up in the child. This is more how biological evolution works wherein the
     Chromosome is built from a random selection of a little of Parent A and a little of Parent B.
+    
+  \subsection{Tournament}
+  From a population the `best' individuals must be chosen to pass their genetic code onto future generations. 
+  The method through which these are chosen is through a tournament selection.
+  
+  After all the individuals have been given a fitness, the best $n$ individuals are taken from
+  the generation to be bred against each other. Using the following function.
+  
+\begin{verbatim}
+for i in new_population
+  if(mutation)
+    i := best_individuals[random()].mutate()
+  else if(crossover)
+    first := best_individuals[random()]
+    second:= best_individuals[random()]
+    while first == second
+      second := best_individuals[random()]
+    i = first.crossover(second)
+\end{verbatim} 
 
 % maybe this should go infront of methodology.
 \section{Experiments}
