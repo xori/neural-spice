@@ -274,7 +274,7 @@ for i in new_population
 
   These datasets were then merged together. The input layer contains
   "fixed acidity", "volatile acidity", "citric acid", "residual sugar", "chlorides",
-  "free sulphur dioxide", "total sulphur dioxide", "density", "pH", "sulphates" and "alcohol"
+  "free sulphur dioxide", "total sulphur dioxide", "density", "pH", "sulfates" and "alcohol"
   for each of the wines.
 
   The expected output is a single value between 0 and 10.\cite{wine}
@@ -363,7 +363,7 @@ for i in new_population
         seems to occur in the average population.}
         \label{fig:wine_performance_new}
       \end{figure}
-      Unfortunately the learning curve is very similar to the first experiment. The GA over 6 generaions
+      Unfortunately the learning curve is very similar to the first experiment. The GA over 6 generations
       quickly found the most successful solution through random search, which isn't surprising when considering
       that over 6 generations each with a population of $200$ over $72$ runs is a solution set of 86400 random permutations.
 
@@ -411,7 +411,7 @@ for i in new_population
 \section{Conclusion}
 Things could have done better.
 
-The GA was able to exploit the fact that it recieved more $200$ times the random iterations of individuals in generation 0 
+The GA was able to exploit the fact that it received more $200$ times the random iterations of individuals in generation 0 
 than the number of backprop runs in total. Leading to a large random search performing better than backprop, which 
 is not surprising. One could even argue that backprop could perform as good or better if given as many randomized
 individuals as the GA was given.
