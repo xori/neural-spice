@@ -42,10 +42,8 @@ file_list.forEach(function (file, file_index) {
 				temp_row = gens[line_index-SKIP_AMOUNT];
 			}
 			temp_row.average  += parseFloat(values[2]);
-			if (parseFloat(values[1]) > temp_row.best)
-				temp_row.best  = parseFloat(values[1]);
-			if (parseFloat(values[3]) < temp_row.worst)
-				temp_row.worst = parseFloat(values[3]);
+			temp_row.best  += parseFloat(values[1]);
+			temp_row.worst += parseFloat(values[3]);
 		});
 		output();
 	});
@@ -61,6 +59,8 @@ function output () {
 		console.log("Generation, Average, Best, Worst");
 		gens.forEach(function (gen, index) {
 			gen.average /= file_list.length;
+			gen.best /= file_list.length;
+			gen.worst /= file_list.length;
 			console.log(index +s+ gen.average +s+ gen.best +s+ gen.worst);
 		});
 };
