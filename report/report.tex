@@ -226,7 +226,7 @@ operations that were chosen as the crossover and mutation functions.
   The method through which these are chosen is through a tournament selection.
   
   After all the individuals have been given a fitness, the best $n$ individuals are taken from
-  the generation to be bred against each other. Using the following function.
+  the generation to be bred against each other, using the following function \ldots
   
 \begin{verbatim}
 for i in new_population
@@ -326,11 +326,7 @@ for i in new_population
     we can see that the Connect 4 problem is computationally hard to learn, and may not
     be worth it when each generation takes 32 minutes long.
 
-<<<<<<< HEAD
       Unfortunately when looking at Figure \ref{fig:connect4_performance_new} it can be seen
-=======
-      Unfortunately when looking at Figure~\ref{fig:connect4_performace_new} it can be seen
->>>>>>> 8241b9164f47c00b3e87b6d3864514cac02cf3b9
     that very little learning occurs over the course of the experiment. Random guessing
     which should (for this problem) result in a fitness of 0.33. This is what the average
     population starts at. The average population at the end of the experiment is only ~0.35
