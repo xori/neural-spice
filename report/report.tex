@@ -307,11 +307,7 @@ operations that were chosen as the crossover and mutation functions.
     we can see that the Connect 4 problem is computationally hard to learn, and may not
     be worth it when each generation takes 32 minutes long.
 
-<<<<<<< HEAD
       Unfortunately when looking at Figure \ref{fig:connect4_performance_new} it can be seen
-=======
-      Unfortunately when looking at Figure~\ref{fig:connect4_performace_new} it can be seen
->>>>>>> 8241b9164f47c00b3e87b6d3864514cac02cf3b9
     that very little learning occurs over the course of the experiment. Random guessing
     which should (for this problem) result in a fitness of 0.33. This is what the average
     population starts at. The average population at the end of the experiment is only ~0.35
@@ -344,19 +340,20 @@ operations that were chosen as the crossover and mutation functions.
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{wine_performance_new}
-        \caption{Results for GA using Wines data set. The best never improves much, but some learning
+        \caption{Results for GA using Wines data set over $70$ generations. The best never improves much, but some learning
         seems to occur in the average population.}
         \label{fig:wine_performance_new}
       \end{figure}
       Unfortunately the learning curve is very similar to the first experiment. The GA over 6 generaions
       quickly found the most successful solution through random search, which isn't surprising when considering
-      that over 6 generations each with a population of 200 over 72 runs is a solution set of 86400 random permutations.
+      that over 6 generations each with a population of $200$ over $72$ runs is a solution set of 86400 random permutations.
 
     \subsubsection*{$Run_{GA}$ 3) Roulette Union}
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{wine_uniform}
-        \caption{An example single hidden layer neural network.}
+        \caption{Results for GA using Wines data set over $100$ generations, using exclusively Roulette Union crossover.
+        Overall, the new crossover did not change the outcome of the experiment as hoped.}
         \label{fig:wine_uniform}
       \end{figure}
       The Roulette Union (Figure~\ref{fig:wine_uniform}) does not show any improvements over
@@ -372,7 +369,8 @@ operations that were chosen as the crossover and mutation functions.
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{wine_change_edge}
-        \caption{An example single hidden layer neural network.}
+        \caption{Results for GA using Wines data set over $100$ generations, using exclusively Roulette Union crossover,
+        and introducing the Change Edge Weight mutation. Again, overall, the results were not astounding.}
         \label{fig:wine_change_edge}
       \end{figure}
       Introducing the alternate mutation did not affect the overall outcome of the experiment, as
@@ -384,7 +382,8 @@ operations that were chosen as the crossover and mutation functions.
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{brain_wine}
-        \caption{An example single hidden layer neural network.}
+        \caption{Results for backpropagation using Wines data set over $1000$ epochs. Absolutely no learning has taken place.
+        Backpropagation cannot surmount this data.}
         \label{fig:brain_wine}
       \end{figure}
     Clearly, Figure~\ref{fig:brain_wine} shows that no learning took place. All that can be concluded from this
@@ -395,12 +394,10 @@ Things could have done better.
 
 We believe this is due to crossovers used.
 
-Blah-de-Blah.
 
 
 % references section
-
-
+\vfill
 \bibliographystyle{IEEEtran}
 \begin{thebibliography}{1}
 
@@ -427,7 +424,7 @@ Ombuki-Berman, B. "COSC 4P80 Lecture Slides" Brock University, Winter 2012/13
 Russell, S. J., and P. Norvig. "Artificial Intelligence, A Modern Approach." Pearson College Div, 2010.
 
 \end{thebibliography}
-
+\enlargethispage{-5in}
 % Can be used to pull up biographies so that the bottom of the last one
 % is flush with the other column.
 %\enlargethispage{-5in}
