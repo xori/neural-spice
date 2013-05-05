@@ -296,11 +296,11 @@ operations that were chosen as the crossover and mutation functions.
         \caption{An example single hidden layer neural network.}
         \label{fig:connect4_performance_new}
       \end{figure}
-      From Figure \ref{fig:connect4_performance_new} and Figure \ref{fig:brain_connect4}
+      From Figure~\ref{fig:connect4_performance_new} and Figure~\ref{fig:brain_connect4}
     we can see that the Connect 4 problem is computationally hard to learn, and may not
     be worth it when each generation takes 32 minutes long.
 
-      Unfortunately when looking at Figure \ref{fig:connect4_performace_new} it can be seen
+      Unfortunately when looking at Figure~\ref{fig:connect4_performace_new} it can be seen
     that very little learning occurs over the course of the experiment. Random guessing
     which should (for this problem) result in a fitness of 0.33. This is what the average
     population starts at. The average population at the end of the experiment is only ~0.35
@@ -318,7 +318,7 @@ operations that were chosen as the crossover and mutation functions.
         \caption{An example single hidden layer neural network.}
         \label{fig:brain_connect4}
       \end{figure}
-    When looking at Figure \ref{fig:brain_connect4} it can be seen that vanilla backprop
+    When looking at Figure~\ref{fig:brain_connect4} it can be seen that vanilla backprop
     at generation 0 is simply guessing the answer, at the end of the experiment it can be
     seen that the backprop did learn increasing its' correctness on the testing set to 0.37.
     More than the average of the GA in the previous experiment, but clearly not very successful.
@@ -335,9 +335,10 @@ operations that were chosen as the crossover and mutation functions.
         \caption{An example single hidden layer neural network.}
         \label{fig:wine_performace_new}
       \end{figure}
+      Unfortunately the learning curve is very similar to the first experiment. The GA over 6 generaions
+      quickly found the most successful solution through random search, which isn't surprising when considering
+      that over 6 generations each with a population of 200 over 72 runs is a solution set of 86400 random permutations.
       
-      Unfortunately this is
-
     \subsubsection*{$Run_{GA}$ 3) Uniform}
       \begin{figure}[here]%[!t]
         \centering
