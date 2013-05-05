@@ -1,6 +1,7 @@
 \documentclass[journal]{IEEEtran}
-\usepackage{lmodern}
+%\usepackage{lmodern}
 \usepackage{amsfonts}
+\usepackage{float}
 %\usepackage{hyperref}
 
 \usepackage{cite}
@@ -27,14 +28,14 @@ Evan~Verworn~(4582938)~\textless{}ev09qz@brocku.ca\textgreater% <-this % stops a
 
 \begin{abstract}
   The purpose of this experiment was to compare the results of training artificial neural networks
-  through standard backpropation and using a genetic algorithm. The genetic algorithm altered both
+  through standard backpropagation and using a genetic algorithm. The genetic algorithm altered both
   the structure and weights of the network to attempt to further encourage learning.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-\IEEEPARstart{T}{his} experiment saught to compare the results of neural network learning by backpropation
+\IEEEPARstart{T}{his} experiment sought to compare the results of neural network learning by backpropagation
 versus using a genetic algorithm. The genetic algorithm would evolve the structure and synaptic weights
 of the network simultaneously, attempting to optimize all the parameters. We found that the genetic algorithm
 performed better overall on average, but may not have been worth the additional computation time.
@@ -72,7 +73,7 @@ between 0 and 1 by a Sigmoid function.
 In the Figure \ref{fig:NeuralNetwork} there is only one hidden layer, but in our experiments we
 are evolving a network that can have up to three hidden layers.
 
-In this experiment, \texttt{brainjs} (written by Heather Arthur) was used for the backpropation learning.\cite{brain}
+In this experiment, \texttt{brainjs} (written by Heather Arthur) was used for the backpropagation learning.\cite{brain}
 
 % Talk about backprop.
 \subsubsection*{Learning}
@@ -133,7 +134,7 @@ fed new problems it has not seen during training. The learning process is called
   genetic code to the child that it might benefit from that it couldn't have received from the parents.
   %This sets this optimization technique apart from traditional hill climbers that don't introduce
 
-  The difficulty of this search method is programically defining the layout of the genetic code
+  The difficulty of this search method is pragmatically defining the layout of the genetic code
   (a Chromosome) and creating different mutation and crossover functions that hopefully it can benefit from.
 
 \section{Methodology}
@@ -170,7 +171,13 @@ operations that were chosen as the crossover and mutation functions.
 
     \subsubsection{Remove Edge}
       Randomly selects a connected edge to remove. There is no restriction in what layer this can happen.
-  %\subsubsection{Change Edge Weight}
+
+    \subsubsection{Change Edge Weight}
+      Five random non-zero weight edges are randomly assigned a new value. By chance, they may not be five
+      distinct edges, since they are randomly selected. This mutation, when used, was twice as likely
+      to occur compared to any of the previous mutations discussed. The chance was higher because the
+      other mutations would possibly be destructive, and this mutation was not as aggressive.
+
   \subsection{Crossovers}
   Crossovers build off of existing solutions and exploit the genetic code we have found thus far to be useful.
     \subsubsection{Union}
@@ -235,12 +242,12 @@ for i in new_population
 
 % maybe this should go infront of methodology.
 \section{Experiments}
-  The purpose of this project is to compare results of vanilla backpropation to the results of
+  The purpose of this project is to compare results of vanilla backpropagation to the results of
   a Genetic Algorithm applied to optimizing a neural network's weights and topography.
 
   Traditionally a comparison like this only focuses on the GA optimizing the weights \textbf{or}
   the topography of the neural net. We have attempted to do both simultaneously. We found the
-  results from the first problem to be inconclusive and desided to run more experiments on a second
+  results from the first problem to be inconclusive and decided to run more experiments on a second
   problem.
 
   The first problem is in need of feature reduction with it's many inputs and few possible outputs.
@@ -312,59 +319,73 @@ for i in new_population
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{connect4_performance_new}
-        \caption{An example single hidden layer neural network.}
+        \caption{Results of GA using Connect4 data set over $20$ generations. No real learning appears to take place.}
         \label{fig:connect4_performance_new}
       \end{figure}
       From Figure~\ref{fig:connect4_performance_new} and Figure~\ref{fig:brain_connect4}
     we can see that the Connect 4 problem is computationally hard to learn, and may not
     be worth it when each generation takes 32 minutes long.
 
+<<<<<<< HEAD
+      Unfortunately when looking at Figure \ref{fig:connect4_performance_new} it can be seen
+=======
       Unfortunately when looking at Figure~\ref{fig:connect4_performace_new} it can be seen
+>>>>>>> 8241b9164f47c00b3e87b6d3864514cac02cf3b9
     that very little learning occurs over the course of the experiment. Random guessing
     which should (for this problem) result in a fitness of 0.33. This is what the average
     population starts at. The average population at the end of the experiment is only ~0.35
-    leading me to speculate that all `learning' that occured was a result of random search.
+    leading me to speculate that all `learning' that occurred was a result of random search.
     This is further supported by the `best' in all runs having a fitness of 0.44 in generation 0 and only
     increasing to 0.47 by generation 20.
 
     With these findings it can be concluded with the standard Union and Crossover functions
-    mentioned above would not be benifitial to encourage learning for this problem.
+    mentioned above would not be beneficial to encourage learning for this problem.
 
     \subsubsection*{$Run_{NN}$ 1) Vanilla Backprop}
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{brain_connect4}
-        \caption{An example single hidden layer neural network.}
+        \caption{Results for backpropagation learning using Connect4 data set over $1000$ epochs. Not much learning
+        appears to take place.}
         \label{fig:brain_connect4}
       \end{figure}
     When looking at Figure~\ref{fig:brain_connect4} it can be seen that vanilla backprop
     at generation 0 is simply guessing the answer, at the end of the experiment it can be
     seen that the backprop did learn increasing its' correctness on the testing set to 0.37.
     More than the average of the GA in the previous experiment, but clearly not very successful.
-    
+
     While vanilla backprop performed worst overall compared to the best of the GA, it can be argued that
     backprop was the `winner' in this competition because it was able to \textbf{learn}. Compared to
     the GA, which found its best in generation 0 through random search.
-    
+
   \subsection{Wine Quality}
     \subsubsection*{$Run_{GA}$ 2) Union/Intersect}
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{wine_performance_new}
-        \caption{An example single hidden layer neural network.}
-        \label{fig:wine_performace_new}
+        \caption{Results for GA using Wines data set. The best never improves much, but some learning
+        seems to occur in the average population.}
+        \label{fig:wine_performance_new}
       \end{figure}
       Unfortunately the learning curve is very similar to the first experiment. The GA over 6 generaions
       quickly found the most successful solution through random search, which isn't surprising when considering
       that over 6 generations each with a population of 200 over 72 runs is a solution set of 86400 random permutations.
-      
-    \subsubsection*{$Run_{GA}$ 3) Uniform}
+
+    \subsubsection*{$Run_{GA}$ 3) Roulette Union}
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{wine_uniform}
         \caption{An example single hidden layer neural network.}
         \label{fig:wine_uniform}
       \end{figure}
+      The Roulette Union (Figure~\ref{fig:wine_uniform}) does not show any improvements over
+      the Union/Intersect crossovers (Figure~\ref{fig:wine_performance_new}). This crossover
+      was introduced to attempt to add diversity to the GA population, as Union and Intersect between two
+      parents can only produce one child each. This meant that if the same parents were selected two or
+      more times for breeding, then their offspring would be identical. The random selection in Roulette Union
+      leads to a very large number of potential offspring, so a more diverse population \textit{should} appear.
+      It does not appear that needing a more diverse population led to the poor results, but rather some other
+      factors that not been found.
 
     \subsubsection*{$Run_{GA}$ 4) Change}
       \begin{figure}[here]%[!t]
@@ -373,8 +394,12 @@ for i in new_population
         \caption{An example single hidden layer neural network.}
         \label{fig:wine_change_edge}
       \end{figure}
+      Introducing the alternate mutation did not affect the overall outcome of the experiment, as
+      shown in Figure~\ref{fig:wine_change_edge}. Since this GA  used Roulette Union as crossover, the
+      results look nearly identical to those in Figure~\ref{fig:wine_uniform}. This less aggressive mutation
+      did change the outcome much because mutation happens infrequently, while crossover happens nearly every time.
 
-    \subsubsection{$Run_{NN}$ 2) Vanilla Backprop}
+    \subsubsection*{$Run_{NN}$ 2) Vanilla Backprop}
       \begin{figure}[here]%[!t]
         \centering
         \includegraphics[width=3.4in]{brain_wine}
